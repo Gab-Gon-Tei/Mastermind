@@ -1,0 +1,18 @@
+Link para vizualização do projeto:
+https://excalidraw.com/#room=52847a0fb010a752b03b,HAk2k9SJWB3EF2A4cOtr2g
+
+Link para vizualização do protótipo de tela:
+https://foursys-my.sharepoint.com/:x:/g/personal/gabriel_teixeira_foursys_com_br/EZKFWvVk-klIuDbmFXCqyisBIzuRCcagExjUIEX89A7bww?e=Lb0k9E
+
+Programação do projeto:
+1 - Criar o banco de dados com as senhas
+
+2 - Compilar o mapa, baixar as books necessárias
+
+3 - Começar a programação do núcleo do jogo, inicialmente, utilizarei somente as letras cruas. 
+
+4 - testes de bugs
+
+5 - Implementar um menu para o jogo, bem como um sistema de cadastro e raking. 
+
+6 - Implementar as cores. 
