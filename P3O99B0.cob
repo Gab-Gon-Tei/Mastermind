@@ -188,8 +188,7 @@
                PERFORM 999-ENCERRA-TRANSACAO
            END-EVALUATE
 
-           PERFORM 999-MANDA-TELA
-           PERFORM 999-CHAMA-FASE2
+           PERFORM 999-TRATA-FASE2
            .
 
        200-FASE2.
@@ -268,11 +267,12 @@
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
+                   PERFORM 999-TRATA-VITORIA
                WHEN OTHER
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
                    PERFORM 999-TRATA-FASE2
-
+           END-EVALUATE
            .
            
        212-FREQUENCIA-SENHA.
@@ -422,7 +422,7 @@
            EXEC CICS SEND
               MAP ('MAPASEN')
               MAPSET('SENHA')
-              FROM(MAPSENO)
+              FROM(MAPASENO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
            .
@@ -456,6 +456,26 @@
            PERFORM 999-MANDA-TELA
            PERFORM 999-CHAMA-FASE2
            .
+
+       999-TRATA-VITORIA.
+      *    MOVE LOW-VALUES                TO MAPLOGO
+           MOVE -1                        TO MSGO
+
+           PERFORM 999-MANDA-TELA
+
+           MOVE '2'                       TO WS-FASE
+           
+           MOVE 'Z'                        TO LETRA1A 
+           MOVE 'Z'                        TO LETRA2A 
+           MOVE 'Z'                        TO LETRA3A 
+           MOVE 'Z'                        TO LETRA4A 
+           MOVE 'Z'                        TO LETRA5A 
+
+           EXEC CICS RETURN
+               TRANSID('FT4A')
+               COMMAREA(WS-DFHCOMMAREA)
+               LENGTH(LENGTH OF WS-DFHCOMMAREA)
+           END-EXEC
 
        999-MAPFAIL.
            MOVE 'ERRO MAPA T04MLOG'        TO WS-MSG-ERRO
