@@ -64,7 +64,7 @@
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
-           COPY T04MLOG.
+           COPY SENHA.
       *COMANDO TECLAS PRESSIONADAS
            COPY DFHAID.
       *CARACTERES E ATRIBUTOS
