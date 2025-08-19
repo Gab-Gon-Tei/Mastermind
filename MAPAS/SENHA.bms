@@ -3,7 +3,7 @@
 * Any Changes made directly to the file may be overwritten.
 *
 * Name
-* 
+*
 *
 * Creation date
 * Mon, 18 Aug 2025 17:18:48 GMT
@@ -12,11 +12,11 @@
 * Mon, 18 Aug 2025 17:18:48 GMT
 *
 * Description
-* 
+*
 *
 ***********************************************************************
 SENHA    DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
-               STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X 
+               STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X
                MAPATTS=(COLOR,HILIGHT)
 MAPASEN  DFHMDI SIZE=(24,80),CTRL=(PRINT,FREEKB)
 
@@ -217,7 +217,7 @@ TENT13   DFHMDF POS=(17,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
 TENT14   DFHMDF POS=(17,28),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
-TENT14   DFHMDF POS=(19,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+TENT15   DFHMDF POS=(19,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
 TENT16   DFHMDF POS=(19,28),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
@@ -237,7 +237,7 @@ LETRA4   DFHMDF POS=(8,44),LENGTH=1,ATTRB=(UNPROT,NORM),               *
 LETRA5   DFHMDF POS=(8,45),LENGTH=1,ATTRB=(UNPROT,NORM),               *
                HILIGHT=REVERSE,PICIN='X(1)'
          DFHMDF POS=(8,47),LENGTH=0,ATTRB=ASKIP
-               
+
          DFHMDF POS=(6,53),LENGTH=10,ATTRB=(ASKIP,BRT),HILIGHT=OFF,    *
                COLOR=,INITIAL='TENTATIVAS'
 CONT     DFHMDF POS=(8,53),LENGTH=2,ATTRB=(PROT,BRT),HILIGHT=OFF,      *
@@ -278,3 +278,4 @@ PINK     DFHMDF POS=(10,71),LENGTH=1,ATTRB=(ASKIP,BRT),                *
 
 SENHA    DFHMSD TYPE=FINAL
          END
+
