@@ -64,6 +64,7 @@
        77  WS-TENT-N                       PIC 9(04).
        77  WS-TENT-H                       PIC 9(04).
        77  WS-TENT-A                       PIC 9(04).
+       77  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
 
       *----------------------------------------------------------------*
       * VARIAVEIS DA DFHCOMMAREA
@@ -140,6 +141,7 @@
        100-FASE1.
            MOVE LOW-VALUES                 TO MAPASENO
            MOVE -1                         TO LETRA1L
+           MOVE WS-CONT-TENTATIVAS         TO CONTO
            EXEC SQL
                SELECT COUNT (ID)
                INTO :WS-COUNT-SENHAS
@@ -201,9 +203,9 @@
            END-EXEC
 
            EXEC CICS RECEIVE
-              MAP   ('MAPLOG')
+              MAP   ('MAPASEN')
               MAPSET('T04MLOG')
-              INTO  (MAPLOGI)
+              INTO  (MAPASENI)
            END-EXEC
            .
 
@@ -213,7 +215,8 @@
            MOVE LETRA3I                            TO WS-LETRA-3-T
            MOVE LETRA4I                            TO WS-LETRA-4-T
            MOVE LETRA5I                            TO WS-LETRA-5-T
-           
+           ADD 1                                   TO WS-CONT-TENTATIVAS
+
            PERFORM 212-FREQUENCIA-SENHA
            PERFORM 213-FREQUENCIA-TENTATIVA
            PERFORM 211-CONTA-POSICAO-CERTA
@@ -222,6 +225,54 @@
            COMPUTE WS-ACERTOS-POSICAO-ERRADA =
             WS-ACERTOS-POSICAO-ERRADA - WS-ACERTOS-POSICAO-CORRETA 
            
+           EVALUATE WS-CONT-TENTATIVAS
+               WHEN 1
+                   MOVE WS-TENTATIVA TO TENT1I
+               WHEN 2
+                   MOVE WS-TENTATIVA TO TENT2I
+               WHEN 3
+                   MOVE WS-TENTATIVA TO TENT3I
+               WHEN 4
+                   MOVE WS-TENTATIVA TO TENT4I
+               WHEN 5
+                   MOVE WS-TENTATIVA TO TENT5I
+               WHEN 6
+                   MOVE WS-TENTATIVA TO TENT6I
+               WHEN 7
+                   MOVE WS-TENTATIVA TO TENT7I
+               WHEN 8
+                   MOVE WS-TENTATIVA TO TENT8I
+               WHEN 9
+                   MOVE WS-TENTATIVA TO TENT9I
+               WHEN 10
+                   MOVE WS-TENTATIVA TO TENT10I
+               WHEN 11
+                   MOVE WS-TENTATIVA TO TENT11I
+               WHEN 12
+                   MOVE WS-TENTATIVA TO TETN12I
+               WHEN 13
+                   MOVE WS-TENTATIVA TO TENT13I
+               WHEN 14
+                   MOVE WS-TENTATIVA TO TENT14I
+               WHEN 15
+                   MOVE WS-TENTATIVA TO TENT15I
+               WHEN 16
+                   MOVE WS-TENTATIVA TO TENT16I
+               WHEN OTHER
+                   MOVE 'TENTATIVAS EXCEDIDAS/ VOCE PERDEU' TO MSGO
+           END-EVALUATE
+           
+           EVALUATE WS-ACERTOS-POSICAO-CORRETA
+               WHEN 5
+                   MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
+                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
+      *             MOVE 'GREEN'                    TO TENT11C
+                   MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
+               WHEN OTHER
+                   MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
+                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
+                   PERFORM 999-TRATA-FASE2
+
            .
            
        212-FREQUENCIA-SENHA.
@@ -254,19 +305,19 @@
            END-PERFORM
            .
        211-CONTA-POSICAO-CERTA.
-           IF WS-LETRA-1 EQUAL DCLSNH-LETRA-1
+           IF WS-LETRA-1 EQUAL WS-LETRA-1-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
-           IF WS-LETRA-2 EQUAL DCLSNH-LETRA-2
+           IF WS-LETRA-2 EQUAL WS-LETRA-2-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
-           IF WS-LETRA-3 EQUAL DCLSNH-LETRA-3
+           IF WS-LETRA-3 EQUAL WS-LETRA-3-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
-           IF WS-LETRA-4 EQUAL DCLSNH-LETRA-4
+           IF WS-LETRA-4 EQUAL WS-LETRA-4-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
-           IF WS-LETRA-5 EQUAL DCLSNH-LETRA-5
+           IF WS-LETRA-5 EQUAL WS-LETRA-5-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
            .
