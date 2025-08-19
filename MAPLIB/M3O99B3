@@ -1,0 +1,305 @@
+       01  MAPATUTI.
+           02  FILLER PIC X(12).
+           02  LABEL1L    COMP  PIC  S9(4).
+           02  LABEL1F    PICTURE X.
+           02  FILLER REDEFINES LABEL1F.
+             03 LABEL1A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL1I  PIC X(23).
+           02  LABEL2L    COMP  PIC  S9(4).
+           02  LABEL2F    PICTURE X.
+           02  FILLER REDEFINES LABEL2F.
+             03 LABEL2A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL2I  PIC X(40).
+           02  LABEL3L    COMP  PIC  S9(4).
+           02  LABEL3F    PICTURE X.
+           02  FILLER REDEFINES LABEL3F.
+             03 LABEL3A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL3I  PIC X(14).
+           02  LABEL4L    COMP  PIC  S9(4).
+           02  LABEL4F    PICTURE X.
+           02  FILLER REDEFINES LABEL4F.
+             03 LABEL4A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL4I  PIC X(55).
+           02  LABEL5L    COMP  PIC  S9(4).
+           02  LABEL5F    PICTURE X.
+           02  FILLER REDEFINES LABEL5F.
+             03 LABEL5A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL5I  PIC X(49).
+           02  LABEL6L    COMP  PIC  S9(4).
+           02  LABEL6F    PICTURE X.
+           02  FILLER REDEFINES LABEL6F.
+             03 LABEL6A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL6I  PIC X(47).
+           02  LABEL7L    COMP  PIC  S9(4).
+           02  LABEL7F    PICTURE X.
+           02  FILLER REDEFINES LABEL7F.
+             03 LABEL7A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL7I  PIC X(48).
+           02  LABEL8L    COMP  PIC  S9(4).
+           02  LABEL8F    PICTURE X.
+           02  FILLER REDEFINES LABEL8F.
+             03 LABEL8A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL8I  PIC X(28).
+           02  LABEL9L    COMP  PIC  S9(4).
+           02  LABEL9F    PICTURE X.
+           02  FILLER REDEFINES LABEL9F.
+             03 LABEL9A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL9I  PIC X(36).
+           02  LABEL10L    COMP  PIC  S9(4).
+           02  LABEL10F    PICTURE X.
+           02  FILLER REDEFINES LABEL10F.
+             03 LABEL10A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL10I  PIC X(43).
+           02  LABEL11L    COMP  PIC  S9(4).
+           02  LABEL11F    PICTURE X.
+           02  FILLER REDEFINES LABEL11F.
+             03 LABEL11A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL11I  PIC X(36).
+           02  LABEL12L    COMP  PIC  S9(4).
+           02  LABEL12F    PICTURE X.
+           02  FILLER REDEFINES LABEL12F.
+             03 LABEL12A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL12I  PIC X(17).
+           02  LABEL13L    COMP  PIC  S9(4).
+           02  LABEL13F    PICTURE X.
+           02  FILLER REDEFINES LABEL13F.
+             03 LABEL13A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL13I  PIC X(67).
+           02  LABEL14L    COMP  PIC  S9(4).
+           02  LABEL14F    PICTURE X.
+           02  FILLER REDEFINES LABEL14F.
+             03 LABEL14A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL14I  PIC X(11).
+           02  LABEL15L    COMP  PIC  S9(4).
+           02  LABEL15F    PICTURE X.
+           02  FILLER REDEFINES LABEL15F.
+             03 LABEL15A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL15I  PIC X(56).
+           02  LABEL16L    COMP  PIC  S9(4).
+           02  LABEL16F    PICTURE X.
+           02  FILLER REDEFINES LABEL16F.
+             03 LABEL16A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL16I  PIC X(48).
+           02  LABEL17L    COMP  PIC  S9(4).
+           02  LABEL17F    PICTURE X.
+           02  FILLER REDEFINES LABEL17F.
+             03 LABEL17A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL17I  PIC X(27).
+           02  LABEL18L    COMP  PIC  S9(4).
+           02  LABEL18F    PICTURE X.
+           02  FILLER REDEFINES LABEL18F.
+             03 LABEL18A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL18I  PIC X(15).
+           02  LABEL19L    COMP  PIC  S9(4).
+           02  LABEL19F    PICTURE X.
+           02  FILLER REDEFINES LABEL19F.
+             03 LABEL19A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL19I  PIC X(15).
+           02  LABEL20L    COMP  PIC  S9(4).
+           02  LABEL20F    PICTURE X.
+           02  FILLER REDEFINES LABEL20F.
+             03 LABEL20A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL20I  PIC X(28).
+           02  LABEL21L    COMP  PIC  S9(4).
+           02  LABEL21F    PICTURE X.
+           02  FILLER REDEFINES LABEL21F.
+             03 LABEL21A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL21I  PIC X(28).
+           02  LABEL22L    COMP  PIC  S9(4).
+           02  LABEL22F    PICTURE X.
+           02  FILLER REDEFINES LABEL22F.
+             03 LABEL22A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL22I  PIC X(28).
+           02  LABEL23L    COMP  PIC  S9(4).
+           02  LABEL23F    PICTURE X.
+           02  FILLER REDEFINES LABEL23F.
+             03 LABEL23A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL23I  PIC X(28).
+           02  LABEL24L    COMP  PIC  S9(4).
+           02  LABEL24F    PICTURE X.
+           02  FILLER REDEFINES LABEL24F.
+             03 LABEL24A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL24I  PIC X(28).
+           02  LABEL25L    COMP  PIC  S9(4).
+           02  LABEL25F    PICTURE X.
+           02  FILLER REDEFINES LABEL25F.
+             03 LABEL25A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL25I  PIC X(28).
+           02  LABEL26L    COMP  PIC  S9(4).
+           02  LABEL26F    PICTURE X.
+           02  FILLER REDEFINES LABEL26F.
+             03 LABEL26A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL26I  PIC X(28).
+           02  LABEL27L    COMP  PIC  S9(4).
+           02  LABEL27F    PICTURE X.
+           02  FILLER REDEFINES LABEL27F.
+             03 LABEL27A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL27I  PIC X(28).
+           02  LABEL28L    COMP  PIC  S9(4).
+           02  LABEL28F    PICTURE X.
+           02  FILLER REDEFINES LABEL28F.
+             03 LABEL28A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL28I  PIC X(28).
+           02  LABEL29L    COMP  PIC  S9(4).
+           02  LABEL29F    PICTURE X.
+           02  FILLER REDEFINES LABEL29F.
+             03 LABEL29A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL29I  PIC X(28).
+           02  LABEL31L    COMP  PIC  S9(4).
+           02  LABEL31F    PICTURE X.
+           02  FILLER REDEFINES LABEL31F.
+             03 LABEL31A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL31I  PIC X(24).
+       01  MAPATUTO REDEFINES MAPATUTI.
+           02  FILLER PIC X(12).
+           02  FILLER PICTURE X(3).
+           02  LABEL1C    PICTURE X.
+           02  LABEL1H    PICTURE X.
+           02  LABEL1O  PIC X(23).
+           02  FILLER PICTURE X(3).
+           02  LABEL2C    PICTURE X.
+           02  LABEL2H    PICTURE X.
+           02  LABEL2O  PIC X(40).
+           02  FILLER PICTURE X(3).
+           02  LABEL3C    PICTURE X.
+           02  LABEL3H    PICTURE X.
+           02  LABEL3O  PIC X(14).
+           02  FILLER PICTURE X(3).
+           02  LABEL4C    PICTURE X.
+           02  LABEL4H    PICTURE X.
+           02  LABEL4O  PIC X(55).
+           02  FILLER PICTURE X(3).
+           02  LABEL5C    PICTURE X.
+           02  LABEL5H    PICTURE X.
+           02  LABEL5O  PIC X(49).
+           02  FILLER PICTURE X(3).
+           02  LABEL6C    PICTURE X.
+           02  LABEL6H    PICTURE X.
+           02  LABEL6O  PIC X(47).
+           02  FILLER PICTURE X(3).
+           02  LABEL7C    PICTURE X.
+           02  LABEL7H    PICTURE X.
+           02  LABEL7O  PIC X(48).
+           02  FILLER PICTURE X(3).
+           02  LABEL8C    PICTURE X.
+           02  LABEL8H    PICTURE X.
+           02  LABEL8O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL9C    PICTURE X.
+           02  LABEL9H    PICTURE X.
+           02  LABEL9O  PIC X(36).
+           02  FILLER PICTURE X(3).
+           02  LABEL10C    PICTURE X.
+           02  LABEL10H    PICTURE X.
+           02  LABEL10O  PIC X(43).
+           02  FILLER PICTURE X(3).
+           02  LABEL11C    PICTURE X.
+           02  LABEL11H    PICTURE X.
+           02  LABEL11O  PIC X(36).
+           02  FILLER PICTURE X(3).
+           02  LABEL12C    PICTURE X.
+           02  LABEL12H    PICTURE X.
+           02  LABEL12O  PIC X(17).
+           02  FILLER PICTURE X(3).
+           02  LABEL13C    PICTURE X.
+           02  LABEL13H    PICTURE X.
+           02  LABEL13O  PIC X(67).
+           02  FILLER PICTURE X(3).
+           02  LABEL14C    PICTURE X.
+           02  LABEL14H    PICTURE X.
+           02  LABEL14O  PIC X(11).
+           02  FILLER PICTURE X(3).
+           02  LABEL15C    PICTURE X.
+           02  LABEL15H    PICTURE X.
+           02  LABEL15O  PIC X(56).
+           02  FILLER PICTURE X(3).
+           02  LABEL16C    PICTURE X.
+           02  LABEL16H    PICTURE X.
+           02  LABEL16O  PIC X(48).
+           02  FILLER PICTURE X(3).
+           02  LABEL17C    PICTURE X.
+           02  LABEL17H    PICTURE X.
+           02  LABEL17O  PIC X(27).
+           02  FILLER PICTURE X(3).
+           02  LABEL18C    PICTURE X.
+           02  LABEL18H    PICTURE X.
+           02  LABEL18O  PIC X(15).
+           02  FILLER PICTURE X(3).
+           02  LABEL19C    PICTURE X.
+           02  LABEL19H    PICTURE X.
+           02  LABEL19O  PIC X(15).
+           02  FILLER PICTURE X(3).
+           02  LABEL20C    PICTURE X.
+           02  LABEL20H    PICTURE X.
+           02  LABEL20O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL21C    PICTURE X.
+           02  LABEL21H    PICTURE X.
+           02  LABEL21O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL22C    PICTURE X.
+           02  LABEL22H    PICTURE X.
+           02  LABEL22O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL23C    PICTURE X.
+           02  LABEL23H    PICTURE X.
+           02  LABEL23O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL24C    PICTURE X.
+           02  LABEL24H    PICTURE X.
+           02  LABEL24O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL25C    PICTURE X.
+           02  LABEL25H    PICTURE X.
+           02  LABEL25O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL26C    PICTURE X.
+           02  LABEL26H    PICTURE X.
+           02  LABEL26O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL27C    PICTURE X.
+           02  LABEL27H    PICTURE X.
+           02  LABEL27O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL28C    PICTURE X.
+           02  LABEL28H    PICTURE X.
+           02  LABEL28O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL29C    PICTURE X.
+           02  LABEL29H    PICTURE X.
+           02  LABEL29O  PIC X(28).
+           02  FILLER PICTURE X(3).
+           02  LABEL31C    PICTURE X.
+           02  LABEL31H    PICTURE X.
+           02  LABEL31O  PIC X(24).
+
