@@ -1,7 +1,7 @@
       *----------------------------------------------------------------*
        IDENTIFICATION                      DIVISION.
       *----------------------------------------------------------------*
-       PROGRAM-ID.                         G34SENHA.
+       PROGRAM-ID.                         P3O99B0.
        AUTHOR.                             GABRIEL E FELIPE.
 
       *----------------------------------------------------------------*
@@ -117,8 +117,8 @@
       * SENHA ALEATORIA, SE BASEANDO NO ID DAS SENHAS.
 
        100-FASE1.
-           MOVE LOW-VALUES                 TO MAPLOGO
-           MOVE -1                         TO T1USERL
+           MOVE LOW-VALUES                 TO MAPSENO
+           MOVE -1                         TO LETRA1L
            EXEC SQL
                SELECT COUNT (ID)
                INTO :WS-COUNT-SENHAS
@@ -172,10 +172,10 @@
        200-FASE2.
            EXEC CICS HANDLE AID
               ENTER   (210-ENTER)
-              PF3     (220-PF3)
-              PF5     (230-PF5)
-              CLEAR   (230-PF5)
-              PF2     (240-PF2)
+      *        PF3     (220-PF3)
+      *        PF5     (230-PF5)
+      *        CLEAR   (230-PF5)
+      *        PF2     (240-PF2)
               ANYKEY  (250-ANYKEY)
            END-EXEC
 
@@ -187,20 +187,13 @@
            .
 
        210-ENTER.
-           IF T1USERL < 5 OR T1USERI EQUAL SPACES OR
-              T1SENHAL < 5 OR T1SENHAI EQUAL SPACES
-              MOVE 'PREENCHA SEU USUARIO E SENHA'
-                                           TO T1MSGO
-              PERFORM 999-TRATA-FASE2
-           END-IF
+           MOVE LETRA1I                            TO DCLSNH-LETRA-1
+           MOVE LETRA2I                            TO DCLSNH-LETRA-2
+           MOVE LETRA3I                            TO DCLSNH-LETRA-3
+           MOVE LETRA4I                            TO DCLSNH-LETRA-4
+           MOVE LETRA5I                            TO DCLSNH-LETRA-5
 
-           MOVE T1USERI                    TO DCLCLI-NOME-USUARIO
-           PERFORM 210-VALIDA-USUARIO
-           PERFORM 210-VALIDA-SENHA
-           MOVE DCLCLI-CPF                 TO WS-ID-CPF
-           PERFORM 260-LISTAGEM-DE-PRODUTOS
-           .
-
+           
        210-VALIDA-USUARIO.
            EXEC SQL
               SELECT NOME_USUARIO
@@ -284,10 +277,10 @@
            .
 
        999-MANDA-TELA.
-           MOVE EIBTRMID                  TO T1TERMO
-           MOVE EIBTRNID                  TO T1TRANSO
-           MOVE EIBTASKN                  TO T1TASKO
-           MOVE WS-FASE                   TO T1FASEO
+           MOVE EIBTRMID                  TO TERMO
+           MOVE EIBTRNID                  TO TRANSO
+           MOVE EIBTASKN                  TO TASKO
+           MOVE WS-FASE                   TO FASEO
 
            ACCEPT WS-DATA FROM DATE
            ACCEPT WS-HORARIO FROM TIME
@@ -304,9 +297,9 @@
            MOVE WS-HORARIO-F                TO T1HORAO
 
            EXEC CICS SEND
-              MAP ('MAPLOG')
-              MAPSET('T04MLOG')
-              FROM(MAPLOGO)
+              MAP ('MAPASEN')
+              MAPSET('SENHA')
+              FROM(MAPSENO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
            .
