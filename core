@@ -1,0 +1,84 @@
+SELECT
+  -- 1. Contagem de acertos na posição correta
+  (CASE WHEN T.C1 = :LETRA_1 THEN 1 ELSE 0 END +
+   CASE WHEN T.C2 = :LETRA_2 THEN 1 ELSE 0 END +
+   CASE WHEN T.C3 = :LETRA_3 THEN 1 ELSE 0 END +
+   CASE WHEN T.C4 = :LETRA_4 THEN 1 ELSE 0 END +
+   CASE WHEN T.C5 = :LETRA_5 THEN 1 ELSE 0 END) AS ACERTOS_POSICAO_CORRETA,
+
+  -- 2. Contagem de acertos de cor, na posição errada
+  (SELECT
+    SUM(
+      LEAST(
+        -- Frequência da letra na senha secreta
+        (CASE WHEN T.C1 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C2 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C3 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C4 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C5 = 'S' THEN 1 ELSE 0 END),
+        -- Frequência da letra na tentativa do jogador
+        (CASE WHEN :LETRA_1 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_2 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_3 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_4 = 'S' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_5 = 'S' THEN 1 ELSE 0 END)
+      ) +
+      -- Repete a mesma lógica para as outras letras 'E', 'N', 'H', 'A'
+      LEAST(
+        (CASE WHEN T.C1 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C2 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C3 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C4 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C5 = 'E' THEN 1 ELSE 0 END),
+        (CASE WHEN :LETRA_1 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_2 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_3 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_4 = 'E' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_5 = 'E' THEN 1 ELSE 0 END)
+      ) +
+      LEAST(
+        (CASE WHEN T.C1 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C2 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C3 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C4 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C5 = 'N' THEN 1 ELSE 0 END),
+        (CASE WHEN :LETRA_1 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_2 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_3 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_4 = 'N' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_5 = 'N' THEN 1 ELSE 0 END)
+      ) +
+      LEAST(
+        (CASE WHEN T.C1 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C2 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C3 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C4 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C5 = 'H' THEN 1 ELSE 0 END),
+        (CASE WHEN :LETRA_1 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_2 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_3 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_4 = 'H' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_5 = 'H' THEN 1 ELSE 0 END)
+      ) +
+      LEAST(
+        (CASE WHEN T.C1 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C2 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C3 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C4 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN T.C5 = 'A' THEN 1 ELSE 0 END),
+        (CASE WHEN :LETRA_1 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_2 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_3 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_4 = 'A' THEN 1 ELSE 0 END) +
+        (CASE WHEN :LETRA_5 = 'A' THEN 1 ELSE 0 END)
+      )
+    )
+  ) -
+  (CASE WHEN T.C1 = :LETRA_1 THEN 1 ELSE 0 END +
+   CASE WHEN T.C2 = :LETRA_2 THEN 1 ELSE 0 END +
+   CASE WHEN T.C3 = :LETRA_3 THEN 1 ELSE 0 END +
+   CASE WHEN T.C4 = :LETRA_4 THEN 1 ELSE 0 END +
+   CASE WHEN T.C5 = :LETRA_5 THEN 1 ELSE 0 END) AS ACERTOS_COR_POSICAO_ERRADA
+
+FROM SENHAS AS T
+WHERE T.ID = 1; -- Selecione a senha secreta específica para o jogo

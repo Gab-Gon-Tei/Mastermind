@@ -64,7 +64,7 @@
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
-           COPY SENHA.
+           COPY M3O99B1.
       *COMANDO TECLAS PRESSIONADAS
            COPY DFHAID.
       *CARACTERES E ATRIBUTOS
@@ -117,7 +117,7 @@
       * SENHA ALEATORIA, SE BASEANDO NO ID DAS SENHAS.
 
        100-FASE1.
-           MOVE LOW-VALUES                 TO MAPSENO
+           MOVE LOW-VALUES                 TO MAPASENO
            MOVE -1                         TO LETRA1L
            EXEC SQL
                SELECT COUNT (ID)
@@ -192,7 +192,8 @@
            MOVE LETRA3I                            TO DCLSNH-LETRA-3
            MOVE LETRA4I                            TO DCLSNH-LETRA-4
            MOVE LETRA5I                            TO DCLSNH-LETRA-5
-
+           
+           
            
        210-VALIDA-USUARIO.
            EXEC SQL
