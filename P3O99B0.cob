@@ -1,7 +1,7 @@
       *----------------------------------------------------------------*
        IDENTIFICATION                      DIVISION.
       *----------------------------------------------------------------*
-       PROGRAM-ID.                         G34SENHA.
+       PROGRAM-ID.                         P3O99B0.
        AUTHOR.                             GABRIEL E FELIPE.
 
       *----------------------------------------------------------------*
@@ -50,21 +50,42 @@
        77  WS-COUNT-SENHAS                 PIC 9(04).
        77  WS-SEED-RANDOM                  PIC 9(04).
        77  WS-ID-RANDOM                    PIC 9(04).
-       01  WS-LETRAS.
-           05 WS-LETRA-1                   PIC X(01).
-           05 WS-LETRA-2                   PIC X(01).
-           05 WS-LETRA-3                   PIC X(01).
-           05 WS-LETRA-4                   PIC X(01).
-           05 WS-LETRA-5                   PIC X(01).
+       77  I                               PIC 9(04).
+       77  WS-CHAR                         PIC 9(04).
+       77  WS-ACERTOS-POSICAO-CORRETA      PIC 9(04).
+       77  WS-ACERTOS-POSICAO-ERRADA       PIC 9(04).
+       77  WS-SENHA-S                      PIC 9(04).
+       77  WS-SENHA-E                      PIC 9(04).
+       77  WS-SENHA-N                      PIC 9(04).
+       77  WS-SENHA-H                      PIC 9(04).
+       77  WS-SENHA-A                      PIC 9(04).
+       77  WS-TENT-S                       PIC 9(04).
+       77  WS-TENT-E                       PIC 9(04).
+       77  WS-TENT-N                       PIC 9(04).
+       77  WS-TENT-H                       PIC 9(04).
+       77  WS-TENT-A                       PIC 9(04).
+
       *----------------------------------------------------------------*
       * VARIAVEIS DA DFHCOMMAREA
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
            05 WS-ID-CPF                    PIC X(11).
+       01  WS-SENHA.
+           05 WS-LETRA-1                   PIC X(01).
+           05 WS-LETRA-2                   PIC X(01).
+           05 WS-LETRA-3                   PIC X(01).
+           05 WS-LETRA-4                   PIC X(01).
+           05 WS-LETRA-5                   PIC X(01).
+       01  WS-TENTATIVA.
+           05 WS-LETRA-1-T                 PIC X(01).
+           05 WS-LETRA-2-T                 PIC X(01).
+           05 WS-LETRA-3-T                 PIC X(01).
+           05 WS-LETRA-4-T                 PIC X(01).
+           05 WS-LETRA-5-T                 PIC X(01).
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
-           COPY SENHA.
+           COPY M3O99B1.
       *COMANDO TECLAS PRESSIONADAS
            COPY DFHAID.
       *CARACTERES E ATRIBUTOS
@@ -117,8 +138,8 @@
       * SENHA ALEATORIA, SE BASEANDO NO ID DAS SENHAS.
 
        100-FASE1.
-           MOVE LOW-VALUES                 TO MAPLOGO
-           MOVE -1                         TO T1USERL
+           MOVE LOW-VALUES                 TO MAPASENO
+           MOVE -1                         TO LETRA1L
            EXEC SQL
                SELECT COUNT (ID)
                INTO :WS-COUNT-SENHAS
@@ -172,10 +193,10 @@
        200-FASE2.
            EXEC CICS HANDLE AID
               ENTER   (210-ENTER)
-              PF3     (220-PF3)
-              PF5     (230-PF5)
-              CLEAR   (230-PF5)
-              PF2     (240-PF2)
+      *        PF3     (220-PF3)
+      *        PF5     (230-PF5)
+      *        CLEAR   (230-PF5)
+      *        PF2     (240-PF2)
               ANYKEY  (250-ANYKEY)
            END-EXEC
 
@@ -187,62 +208,106 @@
            .
 
        210-ENTER.
-           IF T1USERL < 5 OR T1USERI EQUAL SPACES OR
-              T1SENHAL < 5 OR T1SENHAI EQUAL SPACES
-              MOVE 'PREENCHA SEU USUARIO E SENHA'
-                                           TO T1MSGO
-              PERFORM 999-TRATA-FASE2
-           END-IF
+           MOVE LETRA1I                            TO WS-LETRA-1-T
+           MOVE LETRA2I                            TO WS-LETRA-2-T
+           MOVE LETRA3I                            TO WS-LETRA-3-T
+           MOVE LETRA4I                            TO WS-LETRA-4-T
+           MOVE LETRA5I                            TO WS-LETRA-5-T
+           
+           PERFORM 212-FREQUENCIA-SENHA
+           PERFORM 213-FREQUENCIA-TENTATIVA
+           PERFORM 211-CONTA-POSICAO-CERTA
+           PERFORM 214-CONTA-POSICAO-ERRADA
 
-           MOVE T1USERI                    TO DCLCLI-NOME-USUARIO
-           PERFORM 210-VALIDA-USUARIO
-           PERFORM 210-VALIDA-SENHA
-           MOVE DCLCLI-CPF                 TO WS-ID-CPF
-           PERFORM 260-LISTAGEM-DE-PRODUTOS
+           COMPUTE WS-ACERTOS-POSICAO-ERRADA =
+            WS-ACERTOS-POSICAO-ERRADA - WS-ACERTOS-POSICAO-CORRETA 
+           
+           .
+           
+       212-FREQUENCIA-SENHA.
+      * VERIFICA A FREQUENCIA DE CADA LETRA NA SENHA
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
+               MOVE WS-SENHA(I:1) TO WS-CHAR
+               EVALUATE WS-CHAR
+                   WHEN 'S' ADD 1 TO WS-SENHA-S
+                   WHEN 'E' ADD 1 TO WS-SENHA-E
+                   WHEN 'N' ADD 1 TO WS-SENHA-N
+                   WHEN 'H' ADD 1 TO WS-SENHA-H
+                   WHEN 'A' ADD 1 TO WS-SENHA-A
+               END-EVALUATE
+               ADD 1 TO I
+           END-PERFORM
            .
 
-       210-VALIDA-USUARIO.
-           EXEC SQL
-              SELECT NOME_USUARIO
-                    ,SENHA
-                    ,CPF
-              INTO :DCLCLI-NOME-USUARIO
-                   ,:DCLCLI-SENHA
-                   ,:DCLCLI-CPF
-              FROM CLIENTES
-              WHERE NOME_USUARIO = :DCLCLI-NOME-USUARIO
-           END-EXEC
-
-           IF SQLCODE = +100
-               MOVE 'USUARIO NAO ENCONTRADO'
-                                           TO T1MSGO
-               PERFORM 999-TRATA-FASE2
+       213-FREQUENCIA-TENTATIVA.
+      * VERIFICA A FREQUENCIA DE CADA LETRA NA TENTATIVA
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
+               MOVE WS-TENTATIVA(I:1) TO WS-CHAR
+               EVALUATE WS-CHAR
+                   WHEN 'S' ADD 1 TO WS-TENT-S
+                   WHEN 'E' ADD 1 TO WS-TENT-E
+                   WHEN 'N' ADD 1 TO WS-TENT-N
+                   WHEN 'H' ADD 1 TO WS-TENT-H
+                   WHEN 'A' ADD 1 TO WS-TENT-A
+               END-EVALUATE
+               ADD 1 TO I
+           END-PERFORM
+           .
+       211-CONTA-POSICAO-CERTA.
+           IF WS-LETRA-1 EQUAL DCLSNH-LETRA-1
+               ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
+           END-IF
+           IF WS-LETRA-2 EQUAL DCLSNH-LETRA-2
+               ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
+           END-IF
+           IF WS-LETRA-3 EQUAL DCLSNH-LETRA-3
+               ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
+           END-IF
+           IF WS-LETRA-4 EQUAL DCLSNH-LETRA-4
+               ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
+           END-IF
+           IF WS-LETRA-5 EQUAL DCLSNH-LETRA-5
+               ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
+           END-IF
+           .
+       
+       214-CONTA-POSICAO-ERRADA.
+      * ADICIONA O MENOR VALOR DE FREQUENCIA A QUANTIDADE DE ACERTOS
+      * NA POSICAO ERRADA
+      * PARA A LETRA S
+           IF WS-SENHA-S < WS-TENT-S
+               ADD WS-SENHA-S TO WS-ACERTOS-POSICAO-ERRADA
            ELSE
-               IF SQLCODE NOT EQUAL 0
-                   MOVE 'ERRO AO CONSULTAR USUARIO'
-                                           TO T1MSGO
-                   PERFORM 999-TRATA-FASE2
-               END-IF
+               ADD WS-TENT-S TO WS-ACERTOS-POSICAO-ERRADA
            END-IF
-           .
-
-       210-VALIDA-SENHA.
-           IF DCLCLI-SENHA EQUAL T1SENHAI
-               CONTINUE
+       
+      * PARA A LETRA E
+           IF WS-SENHA-E < WS-TENT-E
+               ADD WS-SENHA-E TO WS-ACERTOS-POSICAO-ERRADA
            ELSE
-               MOVE 'SENHA INCORRETA'         TO T1MSGO
-               PERFORM 999-TRATA-FASE2
+               ADD WS-TENT-E TO WS-ACERTOS-POSICAO-ERRADA
            END-IF
-           .
 
-       260-LISTAGEM-DE-PRODUTOS.
-           MOVE '1'                       TO WS-FASE
+      * PARA A LETRA N
+           IF WS-SENHA-N < WS-TENT-N
+               ADD WS-SENHA-N TO WS-ACERTOS-POSICAO-ERRADA
+           ELSE
+               ADD WS-TENT-N TO WS-ACERTOS-POSICAO-ERRADA
+           END-IF
 
-           EXEC CICS XCTL
-               PROGRAM('T04PPRL')
-               COMMAREA(WS-DFHCOMMAREA)
-               LENGTH(LENGTH OF WS-DFHCOMMAREA)
-           END-EXEC
+      * PARA A LETRA H
+           IF WS-SENHA-H < WS-TENT-H
+               ADD WS-SENHA-H TO WS-ACERTOS-POSICAO-ERRADA
+           ELSE
+               ADD WS-TENT-H TO WS-ACERTOS-POSICAO-ERRADA
+           END-IF
+
+      * PARA A LETRA A
+           IF WS-SENHA-A < WS-TENT-A
+               ADD WS-SENHA-A TO WS-ACERTOS-POSICAO-ERRADA
+           ELSE
+               ADD WS-TENT-A TO WS-ACERTOS-POSICAO-ERRADA
+           END-IF
            .
 
        220-PF3.
@@ -284,10 +349,10 @@
            .
 
        999-MANDA-TELA.
-           MOVE EIBTRMID                  TO T1TERMO
-           MOVE EIBTRNID                  TO T1TRANSO
-           MOVE EIBTASKN                  TO T1TASKO
-           MOVE WS-FASE                   TO T1FASEO
+           MOVE EIBTRMID                  TO TERMO
+           MOVE EIBTRNID                  TO TRANSO
+           MOVE EIBTASKN                  TO TASKO
+           MOVE WS-FASE                   TO FASEO
 
            ACCEPT WS-DATA FROM DATE
            ACCEPT WS-HORARIO FROM TIME
@@ -304,9 +369,9 @@
            MOVE WS-HORARIO-F                TO T1HORAO
 
            EXEC CICS SEND
-              MAP ('MAPLOG')
-              MAPSET('T04MLOG')
-              FROM(MAPLOGO)
+              MAP ('MAPASEN')
+              MAPSET('SENHA')
+              FROM(MAPSENO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
            .
