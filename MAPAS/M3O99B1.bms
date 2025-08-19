@@ -3,7 +3,7 @@
 * Any Changes made directly to the file may be overwritten.
 *
 * Name
-* 
+*
 *
 * Creation date
 * Mon, 18 Aug 2025 17:18:48 GMT
@@ -12,11 +12,11 @@
 * Mon, 18 Aug 2025 17:18:48 GMT
 *
 * Description
-* 
+*
 *
 ***********************************************************************
 SENHA    DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
-               STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X 
+               STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X
                MAPATTS=(COLOR,HILIGHT)
 MAPASEN  DFHMDI SIZE=(24,80),CTRL=(PRINT,FREEKB)
 
@@ -217,7 +217,7 @@ TENT13   DFHMDF POS=(17,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
 TENT14   DFHMDF POS=(17,28),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
-TENT14   DFHMDF POS=(19,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+TENT15   DFHMDF POS=(19,19),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
 TENT16   DFHMDF POS=(19,28),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                PICOUT='X(5)'
@@ -237,7 +237,7 @@ LETRA4   DFHMDF POS=(8,44),LENGTH=1,ATTRB=(UNPROT,NORM),               *
 LETRA5   DFHMDF POS=(8,45),LENGTH=1,ATTRB=(UNPROT,NORM),               *
                HILIGHT=REVERSE,PICIN='X(1)'
          DFHMDF POS=(8,47),LENGTH=0,ATTRB=ASKIP
-               
+
          DFHMDF POS=(6,53),LENGTH=10,ATTRB=(ASKIP,BRT),HILIGHT=OFF,    *
                COLOR=,INITIAL='TENTATIVAS'
 CONT     DFHMDF POS=(8,53),LENGTH=2,ATTRB=(PROT,BRT),HILIGHT=OFF,      *
@@ -275,6 +275,29 @@ BLUE     DFHMDF POS=(9,71),LENGTH=1,ATTRB=(ASKIP,BRT),HILIGHT=REVERSE, *
                COLOR=BLUE
 PINK     DFHMDF POS=(10,71),LENGTH=1,ATTRB=(ASKIP,BRT),                *
                HILIGHT=REVERSE,COLOR=PINK
+*----------------------------------------------------------------------
+* INFORMACOES TECNICAS
+DATA     DFHMDF POS=(24,2),LENGTH=10,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               PICOUT='X(10)'
+HORA     DFHMDF POS=(24,13),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               PICOUT='X(5)'
+         DFHMDF POS=(24,22),LENGTH=5,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               COLOR=,INITIAL='FASE:'
+FASE     DFHMDF POS=(24,28),LENGTH=2,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               COLOR=,PICOUT='X(02)'
+         DFHMDF POS=(24,33),LENGTH=7,ATTRB=(ASKIP,BRT),HILIGHT=OFF,    *
+               COLOR=,INITIAL='  TASK:'
+TASK     DFHMDF POS=(24,41),LENGTH=6,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               PICOUT='ZZZZZZ'
+         DFHMDF POS=(24,50),LENGTH=9,ATTRB=(ASKIP,BRT),HILIGHT=OFF,    *
+               COLOR=,INITIAL='TERMINAL:'
+TERM     DFHMDF POS=(24,60),LENGTH=4,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               PICOUT='X(4)'
+         DFHMDF POS=(24,65),LENGTH=10,ATTRB=(ASKIP,BRT),HILIGHT=OFF,   *
+               COLOR=,INITIAL='TRANSACAO:'
+TRANS    DFHMDF POS=(24,76),LENGTH=4,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
+               COLOR=,PICOUT='X(4)'
 
 SENHA    DFHMSD TYPE=FINAL
          END
+
