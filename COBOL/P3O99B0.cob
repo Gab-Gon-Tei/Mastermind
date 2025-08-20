@@ -272,7 +272,7 @@
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
                    PERFORM 999-TRATA-FASE2
-      *    END-EVALUATE
+           END-EVALUATE
            
            .
            
