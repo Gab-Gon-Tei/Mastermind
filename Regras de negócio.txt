@@ -1,38 +1,55 @@
+Objetivo: 
+Se trata de um jogo onde o usuário deve advinhar uma senha secreta, seguindo dicas fornecidas pelo feedback do programa. 
+O desafio está em utilizar a linguagem CICS para realizar o projeto, uma linguagem pouco utilizada para essa função. O game deve ser completo: com tela de menu,
+tutorial, tela de vitória e derrota, além de, claro, a tela de jogo.
+Além disso, o jogo será ambientado no universo de Star Wars, permitindo um verdadeiro 'desafio Jedi', onde o usuário deve usar a Força para completar o desafio,
+e descobrir a senha dos planos para construção da Estrela da Morte. 
+
 RN 1.0: Definição da Senha a ser Sorteada
 O sistema deve sortear uma senha aleatória para cada nova partida.
-
 	RN 1.1: O sorteio deve ocorrer a partir de um conjunto pré-definido de senhas válidas, que servem como "banco de dados".
-
 	RN 1.2: A senha sorteada deve ser composta por cinco caracteres.
-
-	RN 1.3: Os caracteres válidos para a composição da senha são: 'S', 'E', 'N', 'H', 'A'.
+	RN 1.3: Os caracteres válidos para a composição da senha são: 'S', 'E', 'N', 'H', 'A'. Existem 3.125 senhas possiveis com esses caracteres, podendo se repetir e estar em qualquer posição.
 
 RN 2.0: Interação do Jogador e Verificação da Senha
 O sistema deve permitir que o jogador tente adivinhar a senha sorteada, fornecendo pistas a cada tentativa.
-
 	RN 2.1: O jogador terá cinco campos de entrada para digitar sua tentativa.
-
 	RN 2.2: O sistema só deve aceitar caracteres válidos para a entrada do jogador: 'S', 'E', 'N', 'H', 'A'. Qualquer outro caractere deve ser rejeitado.
+		RN 2.2.1: Uma mensagem deve ser enviada para o jogogador caso ele digite caracteres invalidos. "Digite apenas 'S', 'E', 'N', 'H' e 'A' "
 
 	RN 2.3: Após o jogador submeter sua tentativa, o sistema deve compará-la com a senha sorteada.
 
 	RN 2.4: O sistema deve fornecer feedback numérico ao jogador, indicando o quão próxima a tentativa está da senha correta.
-
 		RN 2.4.1: O sistema deve informar a contagem de caracteres que estão na senha sorteada e na posição correta.
-
 		RN 2.4.2: O sistema deve informar a contagem de caracteres que estão na senha sorteada, mas em uma posição incorreta.
 
-RN 3.0: Lógica de Pontuação e Fim do Jogo
-O sistema deve controlar o número de tentativas e determinar o fim da partida.
+	RN 2.5: O sistema armazena um histórico das jogadas num painel lateral, para evitar que o jogador tente a mesma sequencia.
 
+RN 3.0: Lógica de Pontuação
+O sistema deve pontuar o jogador de acordo com os acertos 
 	RN 3.1: O jogador terá um número limitado de 16 tentativas para adivinhar a senha.
+    	RN 3.2: A pontuação do jogador segue a seguinte forma:
+	       - O jogador começa com 1000 pts. 
+               - O usuário não perde pontos se acertar a letra no lugar certo. Se acerta de primeira, ele obtém a pontuação máxima do jogo
+	       - Para cara letra certa, no lugar errado, ele perde 1 ponto
+	       - Para cada letra completamente errada, ele perde 3 pontos
+	RN 3.3: O tempo de jogo é contabilizado e serve para desempate.
 
-	RN 3.2: A partida termina quando uma das seguintes condições for atendida:
+RN 4.0: Fim do Jogo
+O sistema deve encerrar o jogo quando o usuário acertar a senha ou acabar as tentativas.
 
-	RN 3.2.1: O jogador adivinha a senha corretamente. Nesse caso, ele vence o jogo e uma mensagem de vitória é exibida, bem como seu tempo e pontuação. O tempo de jogo é contabilizado e serve para desempate. 
+	RN 4.1: O jogador terá um número limitado de 16 tentativas para adivinhar a senha.
+	RN 4.2: A partida termina quando uma das seguintes condições for atendida:
+	    RN 4.2.1: O jogador adivinha a senha corretamente. 
+		          RN 3.2.1.1. Nesse caso, ele vence o jogo e uma mensagem de vitória é exibida
+				  RN 3.2.1.2. Nesse caso, ele vence o jogo e a pontuação é exibida.  
+	    
+	    RN 4.2.2: A pontuação do jogador segue a seguinte forma:
+	    		  - 3 pontos para cada letra certa no lugar certo
+	    		  - 1 ponto para cada letra certa no lugar errado
+
+	RN 4.2.3: O jogador excede o número máximo de 16 tentativas sem adivinhar a senha. Nesse caso, ele perde o jogo e a senha correta é revelada.	
 	
-	RN 3.2.2: A pontuação do jogador segue a seguinte forma:
-								- 3 pontos para cada letra certa no lugar certo
-								- 1 ponto para cada letra certa no lugar errado
-
-	RN 3.2.3: O jogador excede o número máximo de 16 tentativas sem adivinhar a senha. Nesse caso, ele perde o jogo e a senha correta é revelada.
+RN 5.0: O sistema deve permitir apenas usuários logados a jogarem
+RN 6.0: O sistema deve apresentar a explicação do jogo quando o usuário pressionar a tecla PF01
+RN 7.0: O sistema deve sair do jogo quando o usuário pressionar a tecla PF12

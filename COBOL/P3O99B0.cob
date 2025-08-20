@@ -64,25 +64,24 @@
        77  WS-TENT-N                       PIC 9(04).
        77  WS-TENT-H                       PIC 9(04).
        77  WS-TENT-A                       PIC 9(04).
-       77  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
-
       *----------------------------------------------------------------*
       * VARIAVEIS DA DFHCOMMAREA
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
            05 WS-ID-CPF                    PIC X(11).
-       01  WS-SENHA.
-           05 WS-LETRA-1                   PIC X(01).
-           05 WS-LETRA-2                   PIC X(01).
-           05 WS-LETRA-3                   PIC X(01).
-           05 WS-LETRA-4                   PIC X(01).
-           05 WS-LETRA-5                   PIC X(01).
-       01  WS-TENTATIVA.
-           05 WS-LETRA-1-T                 PIC X(01).
-           05 WS-LETRA-2-T                 PIC X(01).
-           05 WS-LETRA-3-T                 PIC X(01).
-           05 WS-LETRA-4-T                 PIC X(01).
-           05 WS-LETRA-5-T                 PIC X(01).
+           05  WS-SENHA.
+               10 WS-LETRA-1                   PIC X(01).
+               10 WS-LETRA-2                   PIC X(01).
+               10 WS-LETRA-3                   PIC X(01).
+               10 WS-LETRA-4                   PIC X(01).
+               10 WS-LETRA-5                   PIC X(01).
+           05  WS-TENTATIVA.
+               10 WS-LETRA-1-T                 PIC X(01).
+               10 WS-LETRA-2-T                 PIC X(01).
+               10 WS-LETRA-3-T                 PIC X(01).
+               10 WS-LETRA-4-T                 PIC X(01).
+               10 WS-LETRA-5-T                 PIC X(01).
+           05  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
@@ -194,7 +193,7 @@
        200-FASE2.
            EXEC CICS HANDLE AID
               ENTER   (210-ENTER)
-      *        PF3     (220-PF3)
+               PF3     (220-PF3)
       *        PF5     (230-PF5)
       *        CLEAR   (230-PF5)
       *        PF2     (240-PF2)
@@ -260,20 +259,23 @@
                WHEN OTHER
                    MOVE 'TENTATIVAS EXCEDIDAS/ VOCE PERDEU' TO MSGO
            END-EVALUATE
+           MOVE WS-CONT-TENTATIVAS TO CONTO
            
-           EVALUATE WS-ACERTOS-POSICAO-CORRETA
-               WHEN 5
+           EVALUATE WS-ACERTOS-POSICAO-CORRETA ALSO WS-CONT-TENTATIVAS
+               WHEN 5 ALSO 1 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
                    PERFORM 999-TRATA-VITORIA
-               WHEN OTHER
+               WHEN 1 THRU 4 ALSO 1 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
+                   MOVE 'TENTE NOVAMENTE' TO MSGO
                    PERFORM 999-TRATA-FASE2
-           END-EVALUATE
-           
+               WHEN 1 THRU 4 ALSO 17
+                   MOVE 'VOCE PERDEU' TO MSGO
+           END-EVALUATE           
            .
            
        212-FREQUENCIA-SENHA.
@@ -385,7 +387,7 @@
 
        250-ANYKEY.
            MOVE 'TECLA PRESSIONADA INVALIDA!'
-                                           TO T1MSGO
+                                           TO MSGO
            PERFORM 999-TRATA-FASE2
            .
 
@@ -417,8 +419,8 @@
            MOVE WS-MIN                     TO WS-MIN-F
            MOVE WS-SEG                     TO WS-SEG-F
 
-           MOVE WS-DATA-F                   TO T1DATAO
-           MOVE WS-HORARIO-F                TO T1HORAO
+           MOVE WS-DATA-F                   TO DATAO
+           MOVE WS-HORARIO-F                TO HORAO
 
            EXEC CICS SEND
               MAP ('MAPASEN')
@@ -452,7 +454,7 @@
 
        999-TRATA-FASE2.
       *    MOVE LOW-VALUES                TO MAPLOGO
-           MOVE -1                        TO T1USERL
+           MOVE -1                        TO LETRA1L
 
            PERFORM 999-MANDA-TELA
            PERFORM 999-CHAMA-FASE2
@@ -477,9 +479,9 @@
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
-
+           .
        999-MAPFAIL.
-           MOVE 'ERRO MAPA T04MLOG'        TO WS-MSG-ERRO
+           MOVE 'ERRO MAPA M3O99B1'        TO WS-MSG-ERRO
            PERFORM 999-ENCERRA-TRANSACAO
            .
 
