@@ -273,6 +273,7 @@
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
                    PERFORM 999-TRATA-FASE2
            END-EVALUATE
+      *     TESTE DE COMIT
            .
            
        212-FREQUENCIA-SENHA.
