@@ -188,7 +188,7 @@
                PERFORM 999-ENCERRA-TRANSACAO
            END-EVALUATE
 
-           PERFORM 999-TRATA-FASE2
+      *     PERFORM 999-TRATA-FASE2
            .
 
        200-FASE2.
