@@ -73,13 +73,6 @@
       *CARACTERES E ATRIBUTOS
            COPY DFHBMSCA.
 
-           EXEC SQL
-              INCLUDE DCLSENHA
-           END-EXEC.
-
-           EXEC SQL
-              INCLUDE SQLCA
-           END-EXEC.
       *----------------------------------------------------------------*
        LINKAGE                             SECTION.
       *----------------------------------------------------------------*
@@ -115,13 +108,11 @@
            END-EVALUATE
            .
       *----------------------------------------------------------------*
-      * FASE 1 - O PROGRAMA ACESSA O BANCO DE DADOS DAS SENHAS, CONTA 
+      * FASE 1 - O PROGRAMA ACESSA O BANCO DE DADOS DAS SENHAS, CONTA
       * QUANTAS SENHAS EXISTEM. COM ISSO, O PROGRAMA PODE GERAR UMA
       * SENHA ALEATORIA, SE BASEANDO NO ID DAS SENHAS.
 
        100-FASE1.
-           MOVE LOW-VALUES                 TO MAPATUTO
-
            PERFORM 999-MANDA-TELA
            PERFORM 999-CHAMA-FASE2
            .
@@ -135,17 +126,16 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPATUT')
-              MAPSET('M3099B3')
+              MAPSET('M3O99B3')
               INTO  (MAPATUTI)
            END-EXEC
            .
 
        210-ENTER.
            EXEC CICS XCTL
-              MAP ('MAPASEN')
-              MAPSET('SENHA')
-              FROM(MAPSENO)
-              ERASE FREEKB ALARM CURSOR
+              PROGRAM('P3O99B0')
+              COMMAREA(WS-DFHCOMMAREA)
+              LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
            .
 
@@ -156,10 +146,7 @@
            PERFORM 999-ENCERRA-TRANSACAO
            .
 
-
        250-ANYKEY.
-           MOVE 'TECLA PRESSIONADA INVALIDA!'
-                                           TO T1MSGO
            PERFORM 999-TRATA-FASE2
            .
 
@@ -174,14 +161,11 @@
            END-EXEC
            .
 
-
        999-CHAMA-FASE1.
            MOVE '1'                       TO WS-FASE
 
-           MOVE 'USE A FORÇA E DESCUBRA A SENHA'
-                                          TO MSGO
            EXEC CICS XCTL
-              PROGRAM('T04PLOG')
+              PROGRAM('P3O99B0')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -198,35 +182,14 @@
            .
 
        999-TRATA-FASE2.
-           MOVE -1                        TO T1USERL
-
            PERFORM 999-MANDA-TELA
            PERFORM 999-CHAMA-FASE2
            .
 
        999-MANDA-TELA.
-           MOVE EIBTRMID                  TO TERMO
-           MOVE EIBTRNID                  TO TRANSO
-           MOVE EIBTASKN                  TO TASKO
-           MOVE WS-FASE                   TO FASEO
-
-           ACCEPT WS-DATA FROM DATE
-           ACCEPT WS-HORARIO FROM TIME
-
-           MOVE WS-DIA                     TO WS-DIA-F
-           MOVE WS-MES                     TO WS-MES-F
-           MOVE WS-ANO                     TO WS-ANO-F
-
-           MOVE WS-HORA                    TO WS-HORA-F
-           MOVE WS-MIN                     TO WS-MIN-F
-           MOVE WS-SEG                     TO WS-SEG-F
-
-           MOVE WS-DATA-F                   TO T1DATAO
-           MOVE WS-HORARIO-F                TO T1HORAO
-
            EXEC CICS SEND
               MAP ('MAPATUT')
-              MAPSET('M3099B3')
+              MAPSET('M3O99B3')
               FROM(MAPATUTO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
