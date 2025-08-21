@@ -47,9 +47,11 @@
            05 WS-SEG-F                     PIC X(02).
       *----------------------------------------------------------------*
       * VARIVEIS DE TRABALHO
+       77  WS-COUNT-SENHAS-COMP            PIC S9(09) COMP.
        77  WS-COUNT-SENHAS                 PIC 9(04).
-       77  WS-SEED-RANDOM                  PIC 9(04).
+       77  WS-SEED-RANDOM                  PIC COMP-2.
        77  WS-ID-RANDOM                    PIC 9(04).
+       77  WS-ID-RANDOM-COMP               PIC S9(09) COMP.
        77  WS-MULT1                        PIC 9(04).
        77  WS-MULT2                        PIC 9(04).
        77  I                               PIC 9(04).
@@ -171,14 +173,15 @@
            COMPUTE WS-MULT2 = (FUNCTION RANDOM * 1000) + 1
            IF WS-ID-RANDOM > WS-COUNT-SENHAS
                COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
-           END-IF   
+           END-IF
+           MOVE WS-ID-RANDOM TO WS-ID-RANDOM-COMP
 
            EXEC SQL
            SELECT LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5
                INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4, 
                :WS-LETRA-5
            FROM SENHAS
-           WHERE ID = :WS-ID-RANDOM;
+           WHERE ID = :WS-ID-RANDOM-COMP
            END-EXEC
            EVALUATE SQLCODE
             WHEN +100
