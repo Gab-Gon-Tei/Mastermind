@@ -49,7 +49,7 @@
       * VARIVEIS DE TRABALHO
        77  WS-COUNT-SENHAS-COMP            PIC S9(09) COMP.
        77  WS-COUNT-SENHAS                 PIC 9(04).
-       77  WS-SEED-RANDOM                  PIC COMP-2.
+       77  WS-SEED-RANDOM                  COMP-2.
        77  WS-ID-RANDOM                    PIC 9(04).
        77  WS-ID-RANDOM-COMP               PIC S9(09) COMP.
        77  WS-MULT1                        PIC 9(04).
@@ -147,7 +147,7 @@
            MOVE WS-CONT-TENTATIVAS         TO CONTO
            EXEC SQL
                SELECT COUNT (ID)
-               INTO :WS-COUNT-SENHAS
+               INTO :WS-COUNT-SENHAS-COMP
                FROM SENHAS
            END-EXEC
            EVALUATE SQLCODE
@@ -211,19 +211,45 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPASEN')
-              MAPSET('T04MLOG')
+              MAPSET('M3O99B1')
               INTO  (MAPASENI)
            END-EXEC
            .
 
        210-ENTER.
-           MOVE LETRA1I                            TO WS-LETRA-1-T
-           MOVE LETRA2I                            TO WS-LETRA-2-T
-           MOVE LETRA3I                            TO WS-LETRA-3-T
-           MOVE LETRA4I                            TO WS-LETRA-4-T
-           MOVE LETRA5I                            TO WS-LETRA-5-T
-           ADD 1                                   TO WS-CONT-TENTATIVAS
+           IF LETRA1L > 0
+               MOVE LETRA1I                 TO WS-LETRA-1-T
+           ELSE
+               MOVE 'DIGITE A PRIMEIRA LETRA'  TO MSGO
+               PERFORM 999-TRATA-FASE2
+           END-IF
+           IF LETRA2L > 0
+                MOVE LETRA2I                 TO WS-LETRA-2-T
+           ELSE
+                MOVE 'DIGITE A SEGUNDA LETRA'  TO MSGO
+                PERFORM 999-TRATA-FASE2
+           END-IF
 
+           IF LETRA3L > 0
+               MOVE LETRA3I                 TO WS-LETRA-3-T
+           ELSE
+               MOVE 'DIGITE A TERCEIRA LETRA' TO MSGO
+               PERFORM 999-TRATA-FASE2
+           END-IF
+           IF LETRA4L > 0
+               MOVE LETRA4I                 TO WS-LETRA-4-T
+           ELSE
+               MOVE 'DIGITE A QUARTA LETRA'   TO MSGO
+               PERFORM 999-TRATA-FASE2
+           END-IF
+           IF LETRA5L > 0
+               MOVE LETRA5I                 TO WS-LETRA-5-T
+           ELSE
+               MOVE 'DIGITE A QUINTA LETRA'   TO MSGO
+               PERFORM 999-TRATA-FASE2
+           END-IF
+           ADD 1                                   TO WS-CONT-TENTATIVAS
+           
            PERFORM 212-FREQUENCIA-SENHA
            PERFORM 213-FREQUENCIA-TENTATIVA
            PERFORM 211-CONTA-POSICAO-CERTA
@@ -284,6 +310,7 @@
                    PERFORM 999-TRATA-FASE2
                WHEN 1 THRU 4 ALSO 17
                    MOVE 'VOCE PERDEU' TO MSGO
+                   PERFORM 999-TRATA-VITORIA
            END-EVALUATE           
            .
            
@@ -433,7 +460,7 @@
 
            EXEC CICS SEND
               MAP ('MAPASEN')
-              MAPSET('SENHA')
+              MAPSET('M3O99B1')
               FROM(MAPASENO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
