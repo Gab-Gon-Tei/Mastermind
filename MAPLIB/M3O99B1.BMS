@@ -1,0 +1,365 @@
+       01  MAPASENI.
+           02  FILLER PIC X(12).
+           02  TENT1L    COMP  PIC  S9(4).
+           02  TENT1F    PICTURE X.
+           02  FILLER REDEFINES TENT1F.
+             03 TENT1A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT1I  PIC X(5).
+           02  TENT2L    COMP  PIC  S9(4).
+           02  TENT2F    PICTURE X.
+           02  FILLER REDEFINES TENT2F.
+             03 TENT2A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT2I  PIC X(5).
+           02  TENT3L    COMP  PIC  S9(4).
+           02  TENT3F    PICTURE X.
+           02  FILLER REDEFINES TENT3F.
+             03 TENT3A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT3I  PIC X(5).
+           02  TENT4L    COMP  PIC  S9(4).
+           02  TENT4F    PICTURE X.
+           02  FILLER REDEFINES TENT4F.
+             03 TENT4A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT4I  PIC X(5).
+           02  TENT5L    COMP  PIC  S9(4).
+           02  TENT5F    PICTURE X.
+           02  FILLER REDEFINES TENT5F.
+             03 TENT5A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT5I  PIC X(5).
+           02  TENT6L    COMP  PIC  S9(4).
+           02  TENT6F    PICTURE X.
+           02  FILLER REDEFINES TENT6F.
+             03 TENT6A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT6I  PIC X(5).
+           02  TENT7L    COMP  PIC  S9(4).
+           02  TENT7F    PICTURE X.
+           02  FILLER REDEFINES TENT7F.
+             03 TENT7A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT7I  PIC X(5).
+           02  TENT8L    COMP  PIC  S9(4).
+           02  TENT8F    PICTURE X.
+           02  FILLER REDEFINES TENT8F.
+             03 TENT8A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT8I  PIC X(5).
+           02  TENT9L    COMP  PIC  S9(4).
+           02  TENT9F    PICTURE X.
+           02  FILLER REDEFINES TENT9F.
+             03 TENT9A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT9I  PIC X(5).
+           02  TENT10L    COMP  PIC  S9(4).
+           02  TENT10F    PICTURE X.
+           02  FILLER REDEFINES TENT10F.
+             03 TENT10A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT10I  PIC X(5).
+           02  TENT11L    COMP  PIC  S9(4).
+           02  TENT11F    PICTURE X.
+           02  FILLER REDEFINES TENT11F.
+             03 TENT11A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT11I  PIC X(5).
+           02  TETN12L    COMP  PIC  S9(4).
+           02  TETN12F    PICTURE X.
+           02  FILLER REDEFINES TETN12F.
+             03 TETN12A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TETN12I  PIC X(5).
+           02  TENT13L    COMP  PIC  S9(4).
+           02  TENT13F    PICTURE X.
+           02  FILLER REDEFINES TENT13F.
+             03 TENT13A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT13I  PIC X(5).
+           02  TENT14L    COMP  PIC  S9(4).
+           02  TENT14F    PICTURE X.
+           02  FILLER REDEFINES TENT14F.
+             03 TENT14A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT14I  PIC X(5).
+           02  TENT15L    COMP  PIC  S9(4).
+           02  TENT15F    PICTURE X.
+           02  FILLER REDEFINES TENT15F.
+             03 TENT15A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT15I  PIC X(5).
+           02  TENT16L    COMP  PIC  S9(4).
+           02  TENT16F    PICTURE X.
+           02  FILLER REDEFINES TENT16F.
+             03 TENT16A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TENT16I  PIC X(5).
+           02  LETRA1L    COMP  PIC  S9(4).
+           02  LETRA1F    PICTURE X.
+           02  FILLER REDEFINES LETRA1F.
+             03 LETRA1A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LETRA1I  PIC X(1).
+           02  LETRA2L    COMP  PIC  S9(4).
+           02  LETRA2F    PICTURE X.
+           02  FILLER REDEFINES LETRA2F.
+             03 LETRA2A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LETRA2I  PIC X(1).
+           02  LETRA3L    COMP  PIC  S9(4).
+           02  LETRA3F    PICTURE X.
+           02  FILLER REDEFINES LETRA3F.
+             03 LETRA3A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LETRA3I  PIC X(1).
+           02  LETRA4L    COMP  PIC  S9(4).
+           02  LETRA4F    PICTURE X.
+           02  FILLER REDEFINES LETRA4F.
+             03 LETRA4A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LETRA4I  PIC X(1).
+           02  LETRA5L    COMP  PIC  S9(4).
+           02  LETRA5F    PICTURE X.
+           02  FILLER REDEFINES LETRA5F.
+             03 LETRA5A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LETRA5I  PIC X(1).
+           02  CONTL    COMP  PIC  S9(4).
+           02  CONTF    PICTURE X.
+           02  FILLER REDEFINES CONTF.
+             03 CONTA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  CONTI  PIC X(2).
+           02  MSGL    COMP  PIC  S9(4).
+           02  MSGF    PICTURE X.
+           02  FILLER REDEFINES MSGF.
+             03 MSGA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  MSGI  PIC X(18).
+           02  CERTASL    COMP  PIC  S9(4).
+           02  CERTASF    PICTURE X.
+           02  FILLER REDEFINES CERTASF.
+             03 CERTASA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  CERTASI  PIC 9(1).
+           02  ERRADASL    COMP  PIC  S9(4).
+           02  ERRADASF    PICTURE X.
+           02  FILLER REDEFINES ERRADASF.
+             03 ERRADASA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  ERRADASI  PIC X(1).
+           02  GREENL    COMP  PIC  S9(4).
+           02  GREENF    PICTURE X.
+           02  FILLER REDEFINES GREENF.
+             03 GREENA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  GREENI  PIC X(1).
+           02  YELL    COMP  PIC  S9(4).
+           02  YELF    PICTURE X.
+           02  FILLER REDEFINES YELF.
+             03 YELA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  YELI  PIC X(1).
+           02  REDL    COMP  PIC  S9(4).
+           02  REDF    PICTURE X.
+           02  FILLER REDEFINES REDF.
+             03 REDA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  REDI  PIC X(1).
+           02  BLUEL    COMP  PIC  S9(4).
+           02  BLUEF    PICTURE X.
+           02  FILLER REDEFINES BLUEF.
+             03 BLUEA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  BLUEI  PIC X(1).
+           02  PINKL    COMP  PIC  S9(4).
+           02  PINKF    PICTURE X.
+           02  FILLER REDEFINES PINKF.
+             03 PINKA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  PINKI  PIC X(1).
+           02  DATAL    COMP  PIC  S9(4).
+           02  DATAF    PICTURE X.
+           02  FILLER REDEFINES DATAF.
+             03 DATAA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  DATAI  PIC X(10).
+           02  HORAL    COMP  PIC  S9(4).
+           02  HORAF    PICTURE X.
+           02  FILLER REDEFINES HORAF.
+             03 HORAA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  HORAI  PIC X(5).
+           02  FASEL    COMP  PIC  S9(4).
+           02  FASEF    PICTURE X.
+           02  FILLER REDEFINES FASEF.
+             03 FASEA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  FASEI  PIC X(2).
+           02  TASKL    COMP  PIC  S9(4).
+           02  TASKF    PICTURE X.
+           02  FILLER REDEFINES TASKF.
+             03 TASKA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TASKI  PIC X(6).
+           02  TERML    COMP  PIC  S9(4).
+           02  TERMF    PICTURE X.
+           02  FILLER REDEFINES TERMF.
+             03 TERMA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TERMI  PIC X(4).
+           02  TRANSL    COMP  PIC  S9(4).
+           02  TRANSF    PICTURE X.
+           02  FILLER REDEFINES TRANSF.
+             03 TRANSA    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  TRANSI  PIC X(4).
+       01  MAPASENO REDEFINES MAPASENI.
+           02  FILLER PIC X(12).
+           02  FILLER PICTURE X(3).
+           02  TENT1C    PICTURE X.
+           02  TENT1H    PICTURE X.
+           02  TENT1O  PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT2C    PICTURE X.
+           02  TENT2H    PICTURE X.
+           02  TENT2O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT3C    PICTURE X.
+           02  TENT3H    PICTURE X.
+           02  TENT3O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT4C    PICTURE X.
+           02  TENT4H    PICTURE X.
+           02  TENT4O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT5C    PICTURE X.
+           02  TENT5H    PICTURE X.
+           02  TENT5O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT6C    PICTURE X.
+           02  TENT6H    PICTURE X.
+           02  TENT6O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT7C    PICTURE X.
+           02  TENT7H    PICTURE X.
+           02  TENT7O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT8C    PICTURE X.
+           02  TENT8H    PICTURE X.
+           02  TENT8O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT9C    PICTURE X.
+           02  TENT9H    PICTURE X.
+           02  TENT9O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT10C    PICTURE X.
+           02  TENT10H    PICTURE X.
+           02  TENT10O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT11C    PICTURE X.
+           02  TENT11H    PICTURE X.
+           02  TENT11O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TETN12C    PICTURE X.
+           02  TETN12H    PICTURE X.
+           02  TETN12O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT13C    PICTURE X.
+           02  TENT13H    PICTURE X.
+           02  TENT13O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT14C    PICTURE X.
+           02  TENT14H    PICTURE X.
+           02  TENT14O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT15C    PICTURE X.
+           02  TENT15H    PICTURE X.
+           02  TENT15O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  TENT16C    PICTURE X.
+           02  TENT16H    PICTURE X.
+           02  TENT16O PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  LETRA1C    PICTURE X.
+           02  LETRA1H    PICTURE X.
+           02  LETRA1O PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  LETRA2C    PICTURE X.
+           02  LETRA2H    PICTURE X.
+           02  LETRA2O PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  LETRA3C    PICTURE X.
+           02  LETRA3H    PICTURE X.
+           02  LETRA3O PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  LETRA4C    PICTURE X.
+           02  LETRA4H    PICTURE X.
+           02  LETRA4O PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  LETRA5C    PICTURE X.
+           02  LETRA5H    PICTURE X.
+           02  LETRA5O PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  CONTC    PICTURE X.
+           02  CONTH    PICTURE X.
+           02  CONTO PIC Z9.
+           02  FILLER PICTURE X(3).
+           02  MSGC    PICTURE X.
+           02  MSGH    PICTURE X.
+           02  MSGO PIC X(18).
+           02  FILLER PICTURE X(3).
+           02  CERTASC    PICTURE X.
+           02  CERTASH    PICTURE X.
+           02  CERTASO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  ERRADASC    PICTURE X.
+           02  ERRADASH    PICTURE X.
+           02  ERRADASO PIC 9(1).
+           02  FILLER PICTURE X(3).
+           02  GREENC    PICTURE X.
+           02  GREENH    PICTURE X.
+           02  GREENO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  YELC    PICTURE X.
+           02  YELH    PICTURE X.
+           02  YELO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  REDC    PICTURE X.
+           02  REDH    PICTURE X.
+           02  REDO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  BLUEC    PICTURE X.
+           02  BLUEH    PICTURE X.
+           02  BLUEO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  PINKC    PICTURE X.
+           02  PINKH    PICTURE X.
+           02  PINKO  PIC X(1).
+           02  FILLER PICTURE X(3).
+           02  DATAC    PICTURE X.
+           02  DATAH    PICTURE X.
+           02  DATAO PIC X(10).
+           02  FILLER PICTURE X(3).
+           02  HORAC    PICTURE X.
+           02  HORAH    PICTURE X.
+           02  HORAO PIC X(5).
+           02  FILLER PICTURE X(3).
+           02  FASEC    PICTURE X.
+           02  FASEH    PICTURE X.
+           02  FASEO PIC X(02).
+           02  FILLER PICTURE X(3).
+           02  TASKC    PICTURE X.
+           02  TASKH    PICTURE X.
+           02  TASKO PIC ZZZZZZ.
+           02  FILLER PICTURE X(3).
+           02  TERMC    PICTURE X.
+           02  TERMH    PICTURE X.
+           02  TERMO PIC X(4).
+           02  FILLER PICTURE X(3).
+           02  TRANSC    PICTURE X.
+           02  TRANSH    PICTURE X.
+           02  TRANSO PIC X(4).
+
