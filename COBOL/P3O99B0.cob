@@ -50,6 +50,8 @@
        77  WS-COUNT-SENHAS                 PIC 9(04).
        77  WS-SEED-RANDOM                  PIC 9(04).
        77  WS-ID-RANDOM                    PIC 9(04).
+       77  WS-MULT1                        PIC 9(04).
+       77  WS-MULT2                        PIC 9(04).
        77  I                               PIC 9(04).
        77  WS-CHAR                         PIC 9(04).
        77  WS-ACERTOS-POSICAO-CORRETA      PIC 9(04).
@@ -163,10 +165,14 @@
       * O RANDOM PRECISA DE UMA SEED (OU SEMENTE), QUE SERIA UM NUMERO 
       * QUALQUER PARA QUE A FUNCAO TENHA UM NUMERO ALEATORIO.
       * APOS ISSO, O LIMITE E A QUANTIDADE DE SENHAS.     
-           ACCEPT WS-SEED-RANDOM FROM TIME
-           COMPUTE WS-ID-RANDOM = 
-           (FUNCTION RANDOM(WS-SEED-RANDOM) * WS-COUNT-SENHAS) + 1
-           
+           ACCEPT WS-MULT1 FROM TIME
+           COMPUTE WS-SEED-RANDOM = WS-MULT1 * FUNCTION RANDOM
+           COMPUTE WS-ID-RANDOM = WS-SEED-RANDOM + 1
+           COMPUTE WS-MULT2 = (FUNCTION RANDOM * 1000) + 1
+           IF WS-ID-RANDOM > WS-COUNT-SENHAS
+               COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
+           END-IF   
+
            EXEC SQL
            SELECT LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5
                INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4, 
@@ -366,7 +372,7 @@
 
        220-PF3.
            MOVE +80                        TO WS-LENGTH
-           MOVE 'FIM NORMAL DA TRANSACAO FT4A'
+           MOVE 'FIM NORMAL DA TRANSACAO Y1B0'
                                            TO WS-MSG-ERRO
            PERFORM 999-ENCERRA-TRANSACAO
            .
@@ -379,7 +385,7 @@
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('T04PCAD')
+               PROGRAM('P3O99B0')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -436,7 +442,7 @@
            MOVE 'USE A FORÇA E DESCUBRA A SENHA'
                                           TO MSGO
            EXEC CICS XCTL
-              PROGRAM('T04PLOG')
+              PROGRAM('P3O99B0')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -446,7 +452,7 @@
            MOVE '2'                       TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('FT4A')
+               TRANSID('Y1B0')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -475,7 +481,7 @@
            MOVE 'Z'                        TO LETRA5A 
 
            EXEC CICS RETURN
-               TRANSID('FT4A')
+               TRANSID('Y1B0')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
