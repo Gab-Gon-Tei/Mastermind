@@ -285,15 +285,15 @@
            02  FILLER PICTURE X(3).
            02  LETRA1C    PICTURE X.
            02  LETRA1H    PICTURE X.
-           02  LETRA1O  PIC X(1).
+           02  LETRA1O PIC X(1).
            02  FILLER PICTURE X(3).
            02  LETRA2C    PICTURE X.
            02  LETRA2H    PICTURE X.
-           02  LETRA2O  PIC X(1).
+           02  LETRA2O PIC X(1).
            02  FILLER PICTURE X(3).
            02  LETRA3C    PICTURE X.
            02  LETRA3H    PICTURE X.
-           02  LETRA3O  PIC X(1).
+           02  LETRA3O PIC X(1).
            02  FILLER PICTURE X(3).
            02  LETRA4C    PICTURE X.
            02  LETRA4H    PICTURE X.
@@ -301,7 +301,7 @@
            02  FILLER PICTURE X(3).
            02  LETRA5C    PICTURE X.
            02  LETRA5H    PICTURE X.
-           02  LETRA5O  PIC X(1).
+           02  LETRA5O PIC X(1).
            02  FILLER PICTURE X(3).
            02  CONTC    PICTURE X.
            02  CONTH    PICTURE X.

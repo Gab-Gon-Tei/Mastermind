@@ -15,7 +15,7 @@
 *
 *
 ***********************************************************************
-SENHA    DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
+M3099B1  DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
                STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X
                MAPATTS=(COLOR,HILIGHT)
 MAPASEN  DFHMDI SIZE=(24,80),CTRL=(PRINT,FREEKB)
@@ -311,6 +311,6 @@ TERM     DFHMDF POS=(24,60),LENGTH=4,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
 TRANS    DFHMDF POS=(24,76),LENGTH=4,ATTRB=(PROT,BRT),HILIGHT=OFF,     *
                COLOR=,PICOUT='X(4)'
 
-SENHA    DFHMSD TYPE=FINAL
+M3099B1  DFHMSD TYPE=FINAL
          END
 
