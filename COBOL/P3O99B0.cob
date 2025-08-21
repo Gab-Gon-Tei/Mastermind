@@ -55,7 +55,7 @@
        77  WS-MULT1                        PIC 9(04).
        77  WS-MULT2                        PIC 9(04).
        77  I                               PIC 9(04).
-       77  WS-CHAR                         PIC 9(04).
+       77  WS-CHAR                         PIC X(1).
        77  WS-ACERTOS-POSICAO-CORRETA      PIC 9(04).
        77  WS-ACERTOS-POSICAO-ERRADA       PIC 9(04).
        77  WS-SENHA-S                      PIC 9(04).
@@ -299,13 +299,13 @@
            EVALUATE WS-ACERTOS-POSICAO-CORRETA ALSO WS-CONT-TENTATIVAS
                WHEN 5 ALSO 1 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
-                   MOVE WS-SENHA-S  TO ERRADASI
+                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASO
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
                    PERFORM 999-TRATA-VITORIA
                WHEN 1 THRU 4 ALSO 1 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
-                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
+                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASO
                    MOVE 'TENTE NOVAMENTE' TO MSGO
                    PERFORM 999-TRATA-FASE2
                WHEN 1 THRU 4 ALSO 17
@@ -469,7 +469,7 @@
        999-CHAMA-FASE1.
            MOVE '1'                       TO WS-FASE
 
-           MOVE 'USE A FORÇA E DESCUBRA A SENHA'
+           MOVE 'USE A FORCA E DESCUBRA A SENHA'
                                           TO MSGO
            EXEC CICS XCTL
               PROGRAM('P3O99B0')
