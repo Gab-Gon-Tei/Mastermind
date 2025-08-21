@@ -299,7 +299,7 @@
            EVALUATE WS-ACERTOS-POSICAO-CORRETA ALSO WS-CONT-TENTATIVAS
                WHEN 5 ALSO 1 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
-                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASI
+                   MOVE WS-SENHA-S  TO ERRADASI
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
                    PERFORM 999-TRATA-VITORIA
@@ -498,7 +498,7 @@
 
        999-TRATA-VITORIA.
       *    MOVE LOW-VALUES                TO MAPLOGO
-           MOVE -1                        TO MSGO
+           MOVE -1                        TO MSGL
 
            PERFORM 999-MANDA-TELA
 
