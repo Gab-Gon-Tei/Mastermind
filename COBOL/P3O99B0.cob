@@ -68,11 +68,12 @@
        77  WS-TENT-N                       PIC 9(04).
        77  WS-TENT-H                       PIC 9(04).
        77  WS-TENT-A                       PIC 9(04).
+       77  WS-VER-LET                      PIC 9(01).
+       77  WS-VITORIA                      PIC X(1) VALUE 'N'.
       *----------------------------------------------------------------*
       * VARIAVEIS DA DFHCOMMAREA
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
-           05 WS-ID-CPF                    PIC X(11).
            05  WS-SENHA.
                10 WS-LETRA-1                   PIC X(01).
                10 WS-LETRA-2                   PIC X(01).
@@ -86,6 +87,7 @@
                10 WS-LETRA-4-T                 PIC X(01).
                10 WS-LETRA-5-T                 PIC X(01).
            05  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
+           05  WS-PONTUACAO               PIC S9(04) VALUE 100.
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
@@ -202,10 +204,10 @@
        200-FASE2.
            EXEC CICS HANDLE AID
               ENTER   (210-ENTER)
-               PF3     (220-PF3)
-      *        PF5     (230-PF5)
-      *        CLEAR   (230-PF5)
-      *        PF2     (240-PF2)
+              PF3     (220-PF3)
+              PF1     (230-PF1)
+      *       CLEAR   (230-PF5)
+              PF12    (240-PF12)
               ANYKEY  (250-ANYKEY)
            END-EXEC
 
@@ -218,32 +220,38 @@
 
        210-ENTER.
            IF LETRA1L > 0
-               MOVE LETRA1I                 TO WS-LETRA-1-T
+                MOVE 1                   TO WS-VER-LET
+                PERFORM 999-VERIFICA-LETRA
            ELSE
-               MOVE 'DIGITE A PRIMEIRA LETRA'  TO MSGO
-               PERFORM 999-TRATA-FASE2
+                MOVE 'DIGITE A PRIMEIRA LETRA'  TO MSGO
+                PERFORM 999-TRATA-FASE2
            END-IF
+      
            IF LETRA2L > 0
-                MOVE LETRA2I                 TO WS-LETRA-2-T
+                MOVE 2                   TO WS-VER-LET
+                PERFORM 999-VERIFICA-LETRA
            ELSE
                 MOVE 'DIGITE A SEGUNDA LETRA'  TO MSGO
                 PERFORM 999-TRATA-FASE2
            END-IF
 
            IF LETRA3L > 0
-               MOVE LETRA3I                 TO WS-LETRA-3-T
+               MOVE 3                   TO WS-VER-LET
+               PERFORM 999-VERIFICA-LETRA
            ELSE
                MOVE 'DIGITE A TERCEIRA LETRA' TO MSGO
                PERFORM 999-TRATA-FASE2
            END-IF
            IF LETRA4L > 0
-               MOVE LETRA4I                 TO WS-LETRA-4-T
+               MOVE 4                   TO WS-VER-LET
+               PERFORM 999-VERIFICA-LETRA
            ELSE
                MOVE 'DIGITE A QUARTA LETRA'   TO MSGO
                PERFORM 999-TRATA-FASE2
            END-IF
            IF LETRA5L > 0
-               MOVE LETRA5I                 TO WS-LETRA-5-T
+               MOVE 5                   TO WS-VER-LET
+               PERFORM 999-VERIFICA-LETRA
            ELSE
                MOVE 'DIGITE A QUINTA LETRA'   TO MSGO
                PERFORM 999-TRATA-FASE2
@@ -302,18 +310,21 @@
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASO
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
+                   PERFORM 999-PONTUACAO
+                   MOVE 'S' TO WS-VITORIA
                    PERFORM 999-TRATA-VITORIA
                WHEN 0 THRU 4 ALSO 17
                    MOVE 'VOCE PERDEU' TO MSGO
+                   MOVE 'N' TO WS-VITORIA
                    PERFORM 999-TRATA-VITORIA
                WHEN OTHER
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA TO ERRADASO
                    MOVE WS-SENHA          TO MSGO
+                   PERFORM 999-PONTUACAO
                    PERFORM 999-TRATA-FASE2
            END-EVALUATE
            .
-
        212-FREQUENCIA-SENHA.
       * VERIFICA A FREQUENCIA DE CADA LETRA NA SENHA
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
@@ -346,6 +357,7 @@
       *    MOVE 0 TO I
            .
        211-CONTA-POSICAO-CERTA.
+           MOVE 0                      TO WS-ACERTOS-POSICAO-CORRETA
            IF WS-LETRA-1 EQUAL WS-LETRA-1-T
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
@@ -401,26 +413,34 @@
                ADD WS-TENT-A TO WS-ACERTOS-POSICAO-ERRADA
            END-IF
            .
-
-       220-PF3.
+       
+       240-PF12.
            MOVE +80                        TO WS-LENGTH
            MOVE 'FIM NORMAL DA TRANSACAO Y1B0'
                                            TO WS-MSG-ERRO
            PERFORM 999-ENCERRA-TRANSACAO
            .
 
-       230-PF5.
-           PERFORM 999-CHAMA-FASE1
-           .
-
-       240-PF2.
+       230-PF1.
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B0')
+               PROGRAM('P3O99B2')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
+           .
+
+       220-PF3.
+      *    MOVE '1'                       TO WS-FASE
+
+      *    EXEC CICS XCTL
+      *        PROGRAM('P3O99B0')
+      *        COMMAREA(WS-DFHCOMMAREA)
+      *        LENGTH(LENGTH OF WS-DFHCOMMAREA)
+      *    END-EXEC
+           MOVE 'MENU'         TO WS-MSG-ERRO
+           PERFORM 999-ENCERRA-TRANSACAO
            .
 
        250-ANYKEY.
@@ -428,7 +448,72 @@
                                            TO MSGO
            PERFORM 999-TRATA-FASE2
            .
-
+       999-PONTUACAO.
+           COMPUTE WS-PONTUACAO =
+                WS-PONTUACAO - (15 - (WS-ACERTOS-POSICAO-CORRETA * 3)-
+                WS-ACERTOS-POSICAO-ERRADA)
+           .
+       999-VERIFICA-LETRA.
+           EVALUATE WS-VER-LET
+           WHEN 1
+               EVALUATE LETRA1I
+                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                       MOVE LETRA1I                 TO WS-LETRA-1-T
+                   WHEN SPACES
+                       MOVE 'DIGITE A PRIMEIRA LETRA' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   WHEN OTHER
+                       MOVE 'DIGITE S, E, N, H OU A' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   END-EVALUATE
+           WHEN 2
+               EVALUATE LETRA2I
+                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                       MOVE LETRA2I                 TO WS-LETRA-2-T
+                   WHEN SPACES
+                       MOVE 'DIGITE A SEGUNDA LETRA' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   WHEN OTHER
+                       MOVE 'DIGITE S, E, N, H OU A' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   END-EVALUATE
+           WHEN 3
+               EVALUATE LETRA3I
+                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                       MOVE LETRA3I                 TO WS-LETRA-3-T
+                   WHEN SPACES
+                       MOVE 'DIGITE A TERCEIRA LETRA' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   WHEN OTHER
+                       MOVE 'DIGITE S, E, N, H OU A' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   END-EVALUATE
+           WHEN 4
+               EVALUATE LETRA4I
+                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                       MOVE LETRA4I                 TO WS-LETRA-4-T
+                   WHEN SPACES
+                       MOVE 'DIGITE A QUARTA LETRA' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   WHEN OTHER
+                       MOVE 'DIGITE S, E, N, H OU A' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   END-EVALUATE
+           WHEN 5
+               EVALUATE LETRA5I
+                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                       MOVE LETRA5I                 TO WS-LETRA-5-T
+                   WHEN SPACES
+                       MOVE 'DIGITE A QUINTA LETRA' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   WHEN OTHER
+                       MOVE 'DIGITE S, E, N, H OU A' TO MSGO
+                       PERFORM 999-TRATA-FASE2
+                   END-EVALUATE
+           WHEN OTHER
+                CONTINUE
+           END-EVALUATE
+           .
        999-ENCERRA-TRANSACAO.
            EXEC CICS SEND TEXT
               FROM (WS-MSG-ERRO)
@@ -499,24 +584,19 @@
            .
 
        999-TRATA-VITORIA.
-      *    MOVE LOW-VALUES                TO MAPLOGO
-           MOVE -1                        TO MSGL
-
-           PERFORM 999-MANDA-TELA
-
-           MOVE '2'                       TO WS-FASE
-
-           MOVE 'Z'                        TO LETRA1A
-           MOVE 'Z'                        TO LETRA2A
-           MOVE 'Z'                        TO LETRA3A
-           MOVE 'Z'                        TO LETRA4A
-           MOVE 'Z'                        TO LETRA5A
-
-           EXEC CICS RETURN
-               TRANSID('Y1B0')
-               COMMAREA(WS-DFHCOMMAREA)
-               LENGTH(LENGTH OF WS-DFHCOMMAREA)
-           END-EXEC
+           EVALUATE WS-VITORIA
+           WHEN 'S'
+               MOVE +80                        TO WS-LENGTH
+               STRING 'VOCE VENCEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
+                   WS-PONTUACAO DELIMITED BY SIZE
+               INTO WS-MSG-ERRO
+               PERFORM 999-ENCERRA-TRANSACAO
+           WHEN 'N'
+               MOVE +80                        TO WS-LENGTH
+               STRING 'VOCE PERDEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
+                   WS-PONTUACAO DELIMITED BY SIZE
+               INTO WS-MSG-ERRO
+               PERFORM 999-ENCERRA-TRANSACAO
            .
        999-MAPFAIL.
            MOVE 'ERRO MAPA M3O99B1'        TO WS-MSG-ERRO
