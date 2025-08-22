@@ -51,19 +51,20 @@
       * VARIAVEIS DA DFHCOMMAREA
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
-           05 WS-ID-CPF                    PIC X(11).
-       01  WS-SENHA.
-           05 WS-LETRA-1                   PIC X(01).
-           05 WS-LETRA-2                   PIC X(01).
-           05 WS-LETRA-3                   PIC X(01).
-           05 WS-LETRA-4                   PIC X(01).
-           05 WS-LETRA-5                   PIC X(01).
-       01  WS-TENTATIVA.
-           05 WS-LETRA-1-T                 PIC X(01).
-           05 WS-LETRA-2-T                 PIC X(01).
-           05 WS-LETRA-3-T                 PIC X(01).
-           05 WS-LETRA-4-T                 PIC X(01).
-           05 WS-LETRA-5-T                 PIC X(01).
+           05  WS-SENHA.
+               10 WS-LETRA-1                   PIC X(01).
+               10 WS-LETRA-2                   PIC X(01).
+               10 WS-LETRA-3                   PIC X(01).
+               10 WS-LETRA-4                   PIC X(01).
+               10 WS-LETRA-5                   PIC X(01).
+           05  WS-TENTATIVA.
+               10 WS-LETRA-1-T                 PIC X(01).
+               10 WS-LETRA-2-T                 PIC X(01).
+               10 WS-LETRA-3-T                 PIC X(01).
+               10 WS-LETRA-4-T                 PIC X(01).
+               10 WS-LETRA-5-T                 PIC X(01).
+           05  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
+           05  WS-PONTUACAO               PIC S9(04) VALUE 100.
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
