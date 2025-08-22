@@ -137,7 +137,7 @@
            END-EVALUATE
            .
       *----------------------------------------------------------------*
-      * FASE 1 - O PROGRAMA ACESSA O BANCO DE DADOS DAS SENHAS, CONTA 
+      * FASE 1 - O PROGRAMA ACESSA O BANCO DE DADOS DAS SENHAS, CONTA
       * QUANTAS SENHAS EXISTEM. COM ISSO, O PROGRAMA PODE GERAR UMA
       * SENHA ALEATORIA, SE BASEANDO NO ID DAS SENHAS.
 
@@ -164,9 +164,9 @@
                PERFORM 999-ENCERRA-TRANSACAO
            END-EVALUATE
 
-      * O RANDOM PRECISA DE UMA SEED (OU SEMENTE), QUE SERIA UM NUMERO 
+      * O RANDOM PRECISA DE UMA SEED (OU SEMENTE), QUE SERIA UM NUMERO
       * QUALQUER PARA QUE A FUNCAO TENHA UM NUMERO ALEATORIO.
-      * APOS ISSO, O LIMITE E A QUANTIDADE DE SENHAS.     
+      * APOS ISSO, O LIMITE E A QUANTIDADE DE SENHAS.
            ACCEPT WS-MULT1 FROM TIME
            COMPUTE WS-SEED-RANDOM = WS-MULT1 * FUNCTION RANDOM
            COMPUTE WS-ID-RANDOM = WS-SEED-RANDOM + 1
@@ -178,7 +178,7 @@
 
            EXEC SQL
            SELECT LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5
-               INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4, 
+               INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4,
                :WS-LETRA-5
            FROM SENHAS
            WHERE ID = :WS-ID-RANDOM-COMP
@@ -249,15 +249,15 @@
                PERFORM 999-TRATA-FASE2
            END-IF
            ADD 1                                   TO WS-CONT-TENTATIVAS
-           
+
            PERFORM 212-FREQUENCIA-SENHA
            PERFORM 213-FREQUENCIA-TENTATIVA
            PERFORM 211-CONTA-POSICAO-CERTA
            PERFORM 214-CONTA-POSICAO-ERRADA
 
-           COMPUTE WS-ACERTOS-POSICAO-ERRADA =
-            WS-ACERTOS-POSICAO-ERRADA - WS-ACERTOS-POSICAO-CORRETA 
-           
+            COMPUTE WS-ACERTOS-POSICAO-ERRADA =
+             WS-ACERTOS-POSICAO-ERRADA - WS-ACERTOS-POSICAO-CORRETA
+
            EVALUATE WS-CONT-TENTATIVAS
                WHEN 1
                    MOVE WS-TENTATIVA TO TENT1I
@@ -295,25 +295,25 @@
                    MOVE 'TENTATIVAS EXCEDIDAS/ VOCE PERDEU' TO MSGO
            END-EVALUATE
            MOVE WS-CONT-TENTATIVAS TO CONTO
-           
+
            EVALUATE WS-ACERTOS-POSICAO-CORRETA ALSO WS-CONT-TENTATIVAS
-               WHEN 5 ALSO 1 THRU 16
+               WHEN 5 ALSO 0 THRU 16
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASO
       *             MOVE 'GREEN'                    TO TENT11C
                    MOVE 'SENHA DECODIFICADA/ VOCE VENCEU' TO MSGO
                    PERFORM 999-TRATA-VITORIA
-               WHEN 1 THRU 4 ALSO 1 THRU 16
-                   MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
-                   MOVE WS-ACERTOS-POSICAO-ERRADA  TO ERRADASO
-                   MOVE 'TENTE NOVAMENTE' TO MSGO
-                   PERFORM 999-TRATA-FASE2
-               WHEN 1 THRU 4 ALSO 17
+               WHEN 0 THRU 4 ALSO 17
                    MOVE 'VOCE PERDEU' TO MSGO
                    PERFORM 999-TRATA-VITORIA
-           END-EVALUATE           
+               WHEN OTHER
+                   MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
+                   MOVE WS-ACERTOS-POSICAO-ERRADA TO ERRADASO
+                   MOVE WS-SENHA          TO MSGO
+                   PERFORM 999-TRATA-FASE2
+           END-EVALUATE
            .
-           
+
        212-FREQUENCIA-SENHA.
       * VERIFICA A FREQUENCIA DE CADA LETRA NA SENHA
            PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
@@ -325,8 +325,9 @@
                    WHEN 'H' ADD 1 TO WS-SENHA-H
                    WHEN 'A' ADD 1 TO WS-SENHA-A
                END-EVALUATE
-               ADD 1 TO I
+      *        ADD 1 TO I
            END-PERFORM
+      *    MOVE 0 TO I
            .
 
        213-FREQUENCIA-TENTATIVA.
@@ -340,8 +341,9 @@
                    WHEN 'H' ADD 1 TO WS-TENT-H
                    WHEN 'A' ADD 1 TO WS-TENT-A
                END-EVALUATE
-               ADD 1 TO I
+      *        ADD 1 TO I
            END-PERFORM
+      *    MOVE 0 TO I
            .
        211-CONTA-POSICAO-CERTA.
            IF WS-LETRA-1 EQUAL WS-LETRA-1-T
@@ -360,7 +362,7 @@
                ADD 1 TO WS-ACERTOS-POSICAO-CORRETA
            END-IF
            .
-       
+
        214-CONTA-POSICAO-ERRADA.
       * ADICIONA O MENOR VALOR DE FREQUENCIA A QUANTIDADE DE ACERTOS
       * NA POSICAO ERRADA
@@ -370,7 +372,7 @@
            ELSE
                ADD WS-TENT-S TO WS-ACERTOS-POSICAO-ERRADA
            END-IF
-       
+
       * PARA A LETRA E
            IF WS-SENHA-E < WS-TENT-E
                ADD WS-SENHA-E TO WS-ACERTOS-POSICAO-ERRADA
@@ -503,12 +505,12 @@
            PERFORM 999-MANDA-TELA
 
            MOVE '2'                       TO WS-FASE
-           
-           MOVE 'Z'                        TO LETRA1A 
-           MOVE 'Z'                        TO LETRA2A 
-           MOVE 'Z'                        TO LETRA3A 
-           MOVE 'Z'                        TO LETRA4A 
-           MOVE 'Z'                        TO LETRA5A 
+
+           MOVE 'Z'                        TO LETRA1A
+           MOVE 'Z'                        TO LETRA2A
+           MOVE 'Z'                        TO LETRA3A
+           MOVE 'Z'                        TO LETRA4A
+           MOVE 'Z'                        TO LETRA5A
 
            EXEC CICS RETURN
                TRANSID('Y1B0')
