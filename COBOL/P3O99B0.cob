@@ -591,6 +591,16 @@
            END-EXEC
            .
 
+       999-CHAMA-POP.
+           MOVE '1'                       TO WS-FASE
+
+           EXEC CICS XCTL
+              PROGRAM('P3O99B4')
+              COMMAREA(WS-DFHCOMMAREA)
+              LENGTH(LENGTH OF WS-DFHCOMMAREA)
+           END-EXEC
+           .
+
        999-CHAMA-FASE2.
            MOVE '2'                       TO WS-FASE
 
@@ -612,15 +622,18 @@
        999-TRATA-VITORIA.
            EVALUATE WS-VITORIA
            WHEN 'S'
-               MOVE +80                        TO WS-LENGTH
-               STRING 'VOCE VENCEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
-                   WS-PONTUACAO DELIMITED BY SIZE
-               INTO WS-MSG-ERRO
-               PERFORM 999-ENCERRA-TRANSACAO
+      *        MOVE +80                        TO WS-LENGTH
+      *        STRING 'VOCE VENCEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
+      *            WS-PONTUACAO DELIMITED BY SIZE
+      *        INTO WS-MSG-ERRO
+      *        PERFORM 999-ENCERRA-TRANSACAO
+               PERFORM 999-CHAMA-POP
            WHEN 'N'
-               MOVE +80                        TO WS-LENGTH
+               MOVE +100                        TO WS-LENGTH
                STRING 'VOCE PERDEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
                    WS-PONTUACAO DELIMITED BY SIZE
+               '. DIGITE Y1B0 PARA COMECAR TENTAR NOVAMENTE'
+                DELIMITED BY SIZE
                INTO WS-MSG-ERRO
                PERFORM 999-ENCERRA-TRANSACAO
            .
