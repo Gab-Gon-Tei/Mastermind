@@ -29,7 +29,7 @@
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
 
-           COPY M3O99B5.
+           COPY M3O99B7.
            COPY DFHAID.
            COPY DFHBMSCA.
 

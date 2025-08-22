@@ -209,7 +209,7 @@
        200-FASE2.
            EXEC CICS HANDLE AID
               ENTER   (210-ENTER)
-              PF3     (220-PF3)
+      *       PF3     (220-PF3)
               PF1     (230-PF1)
       *       CLEAR   (230-PF5)
               PF12    (240-PF12)
@@ -436,7 +436,7 @@
            END-EXEC
            .
 
-       220-PF3.
+      *220-PF3.
       *    MOVE '1'                       TO WS-FASE
 
       *    EXEC CICS XCTL
@@ -444,10 +444,10 @@
       *        COMMAREA(WS-DFHCOMMAREA)
       *        LENGTH(LENGTH OF WS-DFHCOMMAREA)
       *    END-EXEC
-           MOVE +80                        TO WS-LENGTH
-           MOVE 'MENU'         TO WS-MSG-ERRO
-           PERFORM 999-ENCERRA-TRANSACAO
-           .
+      *    MOVE +80                        TO WS-LENGTH
+      *    MOVE 'MENU'         TO WS-MSG-ERRO
+      *    PERFORM 999-ENCERRA-TRANSACAO
+      *    .
 
        250-ANYKEY.
            MOVE 'TECLA PRESSIONADA INVALIDA!'
@@ -632,7 +632,7 @@
                MOVE +100                        TO WS-LENGTH
                STRING 'VOCE PERDEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
                    WS-PONTUACAO DELIMITED BY SIZE
-               '. DIGITE Y1B0 PARA COMECAR TENTAR NOVAMENTE'
+               '. DIGITE Y1B0 PARA TENTAR NOVAMENTE.'
                 DELIMITED BY SIZE
                INTO WS-MSG-ERRO
                PERFORM 999-ENCERRA-TRANSACAO
