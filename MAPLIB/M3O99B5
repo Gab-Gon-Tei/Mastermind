@@ -1,0 +1,65 @@
+       01  MAPAVITI.
+           02  FILLER PIC X(12).
+           02  LABEL1L    COMP  PIC  S9(4).
+           02  LABEL1F    PICTURE X.
+           02  FILLER REDEFINES LABEL1F.
+             03 LABEL1A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL1I  PIC X(8).
+           02  LABEL2L    COMP  PIC  S9(4).
+           02  LABEL2F    PICTURE X.
+           02  FILLER REDEFINES LABEL2F.
+             03 LABEL2A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL2I  PIC X(33).
+           02  LABEL3L    COMP  PIC  S9(4).
+           02  LABEL3F    PICTURE X.
+           02  FILLER REDEFINES LABEL3F.
+             03 LABEL3A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL3I  PIC X(33).
+           02  LABEL4L    COMP  PIC  S9(4).
+           02  LABEL4F    PICTURE X.
+           02  FILLER REDEFINES LABEL4F.
+             03 LABEL4A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL4I  PIC X(30).
+           02  LABEL5L    COMP  PIC  S9(4).
+           02  LABEL5F    PICTURE X.
+           02  FILLER REDEFINES LABEL5F.
+             03 LABEL5A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL5I  PIC X(9).
+           02  LABEL6L    COMP  PIC  S9(4).
+           02  LABEL6F    PICTURE X.
+           02  FILLER REDEFINES LABEL6F.
+             03 LABEL6A    PICTURE X.
+           02  FILLER   PICTURE X(2).
+           02  LABEL6I  PIC X(5).
+       01  MAPAVITO REDEFINES MAPAVITI.
+           02  FILLER PIC X(12).
+           02  FILLER PICTURE X(3).
+           02  LABEL1C    PICTURE X.
+           02  LABEL1H    PICTURE X.
+           02  LABEL1O  PIC X(8).
+           02  FILLER PICTURE X(3).
+           02  LABEL2C    PICTURE X.
+           02  LABEL2H    PICTURE X.
+           02  LABEL2O  PIC X(33).
+           02  FILLER PICTURE X(3).
+           02  LABEL3C    PICTURE X.
+           02  LABEL3H    PICTURE X.
+           02  LABEL3O  PIC X(33).
+           02  FILLER PICTURE X(3).
+           02  LABEL4C    PICTURE X.
+           02  LABEL4H    PICTURE X.
+           02  LABEL4O  PIC X(30).
+           02  FILLER PICTURE X(3).
+           02  LABEL5C    PICTURE X.
+           02  LABEL5H    PICTURE X.
+           02  LABEL5O  PIC X(9).
+           02  FILLER PICTURE X(3).
+           02  LABEL6C    PICTURE X.
+           02  LABEL6H    PICTURE X.
+           02  LABEL6O  PIC X(5).
+

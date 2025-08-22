@@ -51,7 +51,6 @@
       * VARIAVEIS DA DFHCOMMAREA
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
-           05 WS-ID-CPF                    PIC X(11).
        01  WS-SENHA.
            05 WS-LETRA-1                   PIC X(01).
            05 WS-LETRA-2                   PIC X(01).
@@ -132,6 +131,8 @@
            .
 
        210-ENTER.
+           MOVE '1'                        TO WS-FASE
+           
            EXEC CICS XCTL
               PROGRAM('P3O99B0')
               COMMAREA(WS-DFHCOMMAREA)
