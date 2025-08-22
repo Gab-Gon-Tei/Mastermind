@@ -134,7 +134,7 @@
 
        210-ENTER.
            MOVE '1'                        TO WS-FASE
-           
+
            EXEC CICS XCTL
               PROGRAM('P3O99B0')
               COMMAREA(WS-DFHCOMMAREA)
