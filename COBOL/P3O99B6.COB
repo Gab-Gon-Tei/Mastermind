@@ -2,7 +2,7 @@
       *----------------------------------------------------------------*
        IDENTIFICATION                      DIVISION.
       *----------------------------------------------------------------*
-       PROGRAM-ID.                         P3O99B4.
+       PROGRAM-ID.                         P3O99B6.
        AUTHOR.                             FELIPE.
 
       *----------------------------------------------------------------*
@@ -73,9 +73,9 @@
            END-EXEC
 
            EXEC CICS RECEIVE
-              MAP   ('MAPAVIT')
-              MAPSET('M3O99B5')
-              INTO  (MAPAVITI)
+              MAP   ('MAPAEXP')
+              MAPSET('M3O99B7')
+              INTO  (MAPAEXPI)
            END-EXEC
            .
       
@@ -83,7 +83,7 @@
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B6')
+               PROGRAM('P3O99B0')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -108,21 +108,23 @@
             END-EXEC
             EXEC CICS RETURN
             END-EXEC
+
             .
 
        999-MANDA-TELA.
-            EXEC CICS SEND
-               MAP ('MAPAVIT')
-               MAPSET('M3O99B5')
-               MAPONLY CURSOR
-            END-EXEC
+           EXEC CICS SEND
+              MAP ('MAPAEXP')
+              MAPSET('M3O99B7')
+              FROM(MAPAEXPO)
+              ERASE FREEKB ALARM CURSOR
+           END-EXEC
             .
 
        999-CHAMA-FASE1.
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B4')
+               PROGRAM('P3O99B6')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -132,7 +134,7 @@
            MOVE '2'                        TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('Y1B4')
+               TRANSID('Y1B6')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
