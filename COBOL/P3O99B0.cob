@@ -325,7 +325,8 @@
                WHEN OTHER
                    MOVE WS-ACERTOS-POSICAO-CORRETA TO CERTASI
                    MOVE WS-ACERTOS-POSICAO-ERRADA TO ERRADASO
-                   MOVE WS-SENHA          TO MSGO
+      *            MOVE WS-SENHA          TO MSGO
+                   MOVE 'TENTE NOVAMENTE'          TO MSGO
                    PERFORM 999-PONTUACAO
                    PERFORM 999-TRATA-FASE2
            END-EVALUATE
@@ -629,7 +630,7 @@
       *        PERFORM 999-ENCERRA-TRANSACAO
                PERFORM 999-CHAMA-POP
            WHEN 'N'
-               MOVE +100                        TO WS-LENGTH
+               MOVE +80                        TO WS-LENGTH
                STRING 'VOCE PERDEU! SUA PONTUACAO FOI: ' DELIMITED SIZE
                    WS-PONTUACAO DELIMITED BY SIZE
                '. DIGITE Y1B0 PARA TENTAR NOVAMENTE.'
