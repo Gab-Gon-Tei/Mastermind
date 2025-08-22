@@ -168,7 +168,7 @@
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-              PROGRAM('P3O99B0')
+              PROGRAM('P3O99B2')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC

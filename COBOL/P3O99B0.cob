@@ -53,7 +53,7 @@
        77  WS-ID-RANDOM                    PIC 9(04).
        77  WS-ID-RANDOM-COMP               PIC S9(09) COMP.
        77  WS-MULT1                        PIC 9(04).
-       77  WS-MULT2                        PIC 9(04).
+       77  WS-MULT2                        PIC 9(02).
        77  I                               PIC 9(04).
        77  WS-CHAR                         PIC X(1).
        77  WS-ACERTOS-POSICAO-CORRETA      PIC 9(04).
@@ -87,7 +87,7 @@
                10 WS-LETRA-4-T                 PIC X(01).
                10 WS-LETRA-5-T                 PIC X(01).
            05  WS-CONT-TENTATIVAS              PIC 9(04) VALUE 0.
-           05  WS-PONTUACAO               PIC S9(04) VALUE 100.
+           05  WS-PONTUACAO                    PIC 9(04).
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
@@ -172,9 +172,14 @@
            ACCEPT WS-MULT1 FROM TIME
            COMPUTE WS-SEED-RANDOM = WS-MULT1 * FUNCTION RANDOM
            COMPUTE WS-ID-RANDOM = WS-SEED-RANDOM + 1
-           COMPUTE WS-MULT2 = (FUNCTION RANDOM * 1000) + 1
+           ACCEPT WS-MULT2 FROM TIME
+           COMPUTE WS-MULT2 = (FUNCTION RANDOM * WS-MULT2) + 1
            IF WS-ID-RANDOM > WS-COUNT-SENHAS
                COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
+           ELSE 
+               IF WS-ID-RANDOM = 0
+               ADD 1 TO WS-ID-RANDOM
+               END-IF
            END-IF
            MOVE WS-ID-RANDOM TO WS-ID-RANDOM-COMP
 
@@ -197,7 +202,7 @@
                MOVE 'ERRO AO BUSCAR SENHA' TO WS-MSG-ERRO
                PERFORM 999-ENCERRA-TRANSACAO
            END-EVALUATE
-
+           MOVE 100 TO WS-PONTUACAO
             PERFORM 999-TRATA-FASE2
            .
 
@@ -439,6 +444,7 @@
       *        COMMAREA(WS-DFHCOMMAREA)
       *        LENGTH(LENGTH OF WS-DFHCOMMAREA)
       *    END-EXEC
+           MOVE +80                        TO WS-LENGTH
            MOVE 'MENU'         TO WS-MSG-ERRO
            PERFORM 999-ENCERRA-TRANSACAO
            .
@@ -457,7 +463,11 @@
            EVALUATE WS-VER-LET
            WHEN 1
                EVALUATE LETRA1I
-                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                   WHEN 'S' 
+                   WHEN 'E'
+                   WHEN 'N'
+                   WHEN 'H'
+                   WHEN 'A'
                        MOVE LETRA1I                 TO WS-LETRA-1-T
                    WHEN SPACES
                        MOVE 'DIGITE A PRIMEIRA LETRA' TO MSGO
@@ -468,7 +478,11 @@
                    END-EVALUATE
            WHEN 2
                EVALUATE LETRA2I
-                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                   WHEN 'S' 
+                   WHEN 'E'
+                   WHEN 'N'
+                   WHEN 'H'
+                   WHEN 'A'
                        MOVE LETRA2I                 TO WS-LETRA-2-T
                    WHEN SPACES
                        MOVE 'DIGITE A SEGUNDA LETRA' TO MSGO
@@ -479,7 +493,11 @@
                    END-EVALUATE
            WHEN 3
                EVALUATE LETRA3I
-                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                   WHEN 'S' 
+                   WHEN 'E'
+                   WHEN 'N'
+                   WHEN 'H'
+                   WHEN 'A'
                        MOVE LETRA3I                 TO WS-LETRA-3-T
                    WHEN SPACES
                        MOVE 'DIGITE A TERCEIRA LETRA' TO MSGO
@@ -490,7 +508,11 @@
                    END-EVALUATE
            WHEN 4
                EVALUATE LETRA4I
-                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                   WHEN 'S' 
+                   WHEN 'E'
+                   WHEN 'N'
+                   WHEN 'H'
+                   WHEN 'A'
                        MOVE LETRA4I                 TO WS-LETRA-4-T
                    WHEN SPACES
                        MOVE 'DIGITE A QUARTA LETRA' TO MSGO
@@ -501,7 +523,11 @@
                    END-EVALUATE
            WHEN 5
                EVALUATE LETRA5I
-                   WHEN 'S' OR 'E' OR 'N' OR 'H' OR 'A'
+                   WHEN 'S' 
+                   WHEN 'E'
+                   WHEN 'N'
+                   WHEN 'H'
+                   WHEN 'A'
                        MOVE LETRA5I                 TO WS-LETRA-5-T
                    WHEN SPACES
                        MOVE 'DIGITE A QUINTA LETRA' TO MSGO
