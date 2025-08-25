@@ -29,7 +29,7 @@
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
 
-           COPY M3O99B7.
+           COPY M1OY192.
            COPY DFHAID.
            COPY DFHBMSCA.
 
@@ -74,7 +74,7 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPAEXP')
-              MAPSET('M3O99B7')
+              MAPSET('M1OY192')
               INTO  (MAPAEXPI)
            END-EXEC
            .
@@ -83,7 +83,7 @@
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B0')
+               PROGRAM('P1OY195V')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -114,7 +114,7 @@
        999-MANDA-TELA.
            EXEC CICS SEND
               MAP ('MAPAEXP')
-              MAPSET('M3O99B7')
+              MAPSET('M1OY192')
               FROM(MAPAEXPO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
@@ -134,7 +134,7 @@
            MOVE '2'                        TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('Y1B6')
+               TRANSID('Y192')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC

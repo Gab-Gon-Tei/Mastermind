@@ -68,7 +68,7 @@
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
-           COPY M3O99B3.
+           COPY M1OY194.
       *COMANDO TECLAS PRESSIONADAS
            COPY DFHAID.
       *CARACTERES E ATRIBUTOS
@@ -127,7 +127,7 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPATUT')
-              MAPSET('M3O99B3')
+              MAPSET('M1OY194')
               INTO  (MAPATUTI)
            END-EXEC
            .
@@ -136,7 +136,7 @@
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-              PROGRAM('P3O99B0')
+              PROGRAM('P1OY195V')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -168,7 +168,7 @@
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-              PROGRAM('P3O99B2')
+              PROGRAM('P1OY194V')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -178,7 +178,7 @@
            MOVE '2'                       TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('Y1B2')
+               TRANSID('Y194')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -192,7 +192,7 @@
        999-MANDA-TELA.
            EXEC CICS SEND
               MAP ('MAPATUT')
-              MAPSET('M3O99B3')
+              MAPSET('M1OY194')
               FROM(MAPATUTO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC

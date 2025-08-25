@@ -15,7 +15,7 @@
 *
 *
 ***********************************************************************
-M3O99B3  DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
+M1OY194  DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
                STORAGE=AUTO,TIOAPFX=YES,DSATTS=(COLOR,HILIGHT),        X
                MAPATTS=(COLOR,HILIGHT)
 MAPATUT  DFHMDI SIZE=(24,80),CTRL=(PRINT,FREEKB)

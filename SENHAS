@@ -1,0 +1,31 @@
+--DROP TABLE SENHAS;                                                    
+ CREATE TABLE TCC1.SENHAS (                                            
+         ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY              
+                     (START WITH 1 INCREMENT BY 1) PRIMARY KEY,        
+         LETRA_1  CHAR(1) NOT NULL,                                    
+         LETRA_2  CHAR(1) NOT NULL,                                    
+         LETRA_3  CHAR(1) NOT NULL,                                    
+         LETRA_4  CHAR(1) NOT NULL,                                    
+         LETRA_5  CHAR(1) NOT NULL                                     
+ );                                                                    
+ CREATE UNIQUE INDEX IX_SENHAS                                         
+ ON TCC1.SENHAS (ID);                                                  
+ INSERT INTO TCC1.SENHAS (LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5) 
+ WITH LETRAS AS (                                                      
+   SELECT 'S' AS L FROM SYSIBM.SYSDUMMY1 UNION ALL                     
+   SELECT 'E' AS L FROM SYSIBM.SYSDUMMY1 UNION ALL                     
+   SELECT 'N' AS L FROM SYSIBM.SYSDUMMY1 UNION ALL                     
+   SELECT 'H' AS L FROM SYSIBM.SYSDUMMY1 UNION ALL                     
+   SELECT 'A' AS L FROM SYSIBM.SYSDUMMY1                               
+ ) SELECT                                                              
+     L1.L,                                                             
+     L2.L,                                                             
+     L3.L,                                                             
+     L4.L,                                                             
+     L5.L                                                              
+   FROM LETRAS AS L1,                                                  
+   LETRAS AS L2,                                                       
+   LETRAS AS L3,                                                       
+   LETRAS AS L4,                                                       
+   LETRAS AS L5;                                                       
+   GRANT ALL PRIVILEGES ON TABLE TCC1.SENHAS TO PUBLIC                 

@@ -15,7 +15,7 @@
 * 
 *
 ***********************************************************************
-P3O99B3  DFHMSD TYPE=MAP(MAP,DSECT),MODE=INOUT,LANG=COBOL,             *
+M1OY193  DFHMSD TYPE=MAP(MAP,DSECT),MODE=INOUT,LANG=COBOL,             *
                STORAGE=AUTO,MAPATTS=(COLOR,HILIGHT),DSATTS=(COLOR,     *
                HILIGHT),CTRL=(FREEKB,ALARM,FRSET),TIOAPFX=YES
 MAPAVIT  DFHMDI SIZE=(10,40),LINE=8,COLUMN=22

@@ -1,7 +1,7 @@
       *----------------------------------------------------------------*
        IDENTIFICATION                      DIVISION.
       *----------------------------------------------------------------*
-       PROGRAM-ID.                         P3O99B0.
+       PROGRAM-ID.                         P1OY195V.
        AUTHOR.                             GABRIEL E FELIPE.
 
       *----------------------------------------------------------------*
@@ -91,7 +91,7 @@
       *----------------------------------------------------------------*
 
       *MAPA REFERENTE A TELA DE CADASTRO
-           COPY M3O99B1.
+           COPY M1OY195.
       *COMANDO TECLAS PRESSIONADAS
            COPY DFHAID.
       *CARACTERES E ATRIBUTOS
@@ -218,7 +218,7 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPASEN')
-              MAPSET('M3O99B1')
+              MAPSET('M1OY195')
               INTO  (MAPASENI)
            END-EXEC
            .
@@ -431,7 +431,7 @@
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B2')
+               PROGRAM('P1OY194V')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -441,7 +441,7 @@
       *    MOVE '1'                       TO WS-FASE
 
       *    EXEC CICS XCTL
-      *        PROGRAM('P3O99B0')
+      *        PROGRAM('P1OY195V')
       *        COMMAREA(WS-DFHCOMMAREA)
       *        LENGTH(LENGTH OF WS-DFHCOMMAREA)
       *    END-EXEC
@@ -574,7 +574,7 @@
 
            EXEC CICS SEND
               MAP ('MAPASEN')
-              MAPSET('M3O99B1')
+              MAPSET('M1OY195')
               FROM(MAPASENO)
               ERASE FREEKB ALARM CURSOR
            END-EXEC
@@ -586,7 +586,7 @@
            MOVE 'USE A FORCA E DESCUBRA A SENHA'
                                           TO MSGO
            EXEC CICS XCTL
-              PROGRAM('P3O99B0')
+              PROGRAM('P1OY195V')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -596,7 +596,7 @@
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
-              PROGRAM('P3O99B4')
+              PROGRAM('P1OY193V')
               COMMAREA(WS-DFHCOMMAREA)
               LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -606,7 +606,7 @@
            MOVE '2'                       TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('Y1B0')
+               TRANSID('Y195')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -639,7 +639,7 @@
                PERFORM 999-ENCERRA-TRANSACAO
            .
        999-MAPFAIL.
-           MOVE 'ERRO MAPA M3O99B1'        TO WS-MSG-ERRO
+           MOVE 'ERRO MAPA M1OY195'        TO WS-MSG-ERRO
            PERFORM 999-ENCERRA-TRANSACAO
            .
 

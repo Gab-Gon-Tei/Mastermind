@@ -29,7 +29,7 @@
        01  WS-DFHCOMMAREA.
            05 WS-FASE                      PIC X(01).
 
-           COPY M3O99B5.
+           COPY M1OY193.
            COPY DFHAID.
            COPY DFHBMSCA.
 
@@ -74,7 +74,7 @@
 
            EXEC CICS RECEIVE
               MAP   ('MAPAVIT')
-              MAPSET('M3O99B5')
+              MAPSET('M1OY193')
               INTO  (MAPAVITI)
            END-EXEC
            .
@@ -83,7 +83,7 @@
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B6')
+               PROGRAM('P1OY192V')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -113,7 +113,7 @@
        999-MANDA-TELA.
             EXEC CICS SEND
                MAP ('MAPAVIT')
-               MAPSET('M3O99B5')
+               MAPSET('M1OY193')
                MAPONLY CURSOR
             END-EXEC
             .
@@ -122,7 +122,7 @@
            MOVE '1'                        TO WS-FASE
 
            EXEC CICS XCTL
-               PROGRAM('P3O99B4')
+               PROGRAM('P1OY193V')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
@@ -132,7 +132,7 @@
            MOVE '2'                        TO WS-FASE
 
            EXEC CICS RETURN
-               TRANSID('Y1B4')
+               TRANSID('Y193')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
