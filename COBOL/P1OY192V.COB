@@ -61,7 +61,7 @@
            .
 
        100-FASE1.
-           MOVE LOW-VALUES                 TO MAPAVITO
+           MOVE LOW-VALUES                 TO MAPAEXPO
            PERFORM 999-TRATA-FASE2
            .
 

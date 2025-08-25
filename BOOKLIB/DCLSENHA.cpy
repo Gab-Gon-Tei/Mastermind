@@ -9,7 +9,7 @@
       *        COLSUFFIX(YES)                                          *
       * ... IS THE DCLGEN COMMAND THAT MADE THE FOLLOWING STATEMENTS   *
       ******************************************************************
-           EXEC SQL DECLARE SENHAS TABLE
+           EXEC SQL DECLARE TCC1.SENHAS TABLE
            ( ID                             INTEGER NOT NULL,
              LETRA_1                        CHAR(1) NOT NULL,
              LETRA_2                        CHAR(1) NOT NULL,

@@ -150,7 +150,7 @@
            EXEC SQL
                SELECT COUNT (ID)
                INTO :WS-COUNT-SENHAS-COMP
-               FROM SENHAS
+               FROM TCC1.SENHAS
            END-EXEC
            EVALUATE SQLCODE
             WHEN +100
@@ -187,7 +187,7 @@
            SELECT LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5
                INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4,
                :WS-LETRA-5
-           FROM SENHAS
+           FROM TCC1.SENHAS
            WHERE ID = :WS-ID-RANDOM-COMP
            END-EXEC
            EVALUATE SQLCODE
@@ -420,18 +420,22 @@
            END-IF
            .
        
-       240-PF12.
-           MOVE +80                        TO WS-LENGTH
-           MOVE 'FIM NORMAL DA TRANSACAO Y1B0'
-                                           TO WS-MSG-ERRO
-           PERFORM 999-ENCERRA-TRANSACAO
-           .
-
        230-PF1.
            MOVE '1'                       TO WS-FASE
 
            EXEC CICS XCTL
                PROGRAM('P1OY194V')
+               COMMAREA(WS-DFHCOMMAREA)
+               LENGTH(LENGTH OF WS-DFHCOMMAREA)
+           END-EXEC
+           .
+
+       
+       240-PF12.
+           MOVE '1'                       TO WS-FASE
+S
+           EXEC CICS XCTL
+               PROGRAM('P1OY1YZV')
                COMMAREA(WS-DFHCOMMAREA)
                LENGTH(LENGTH OF WS-DFHCOMMAREA)
            END-EXEC
