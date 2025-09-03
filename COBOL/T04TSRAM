@@ -1,21 +1,22 @@
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. T04TSRAM.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-       01 WS-MULT1   PIC 9(4).
-       01 WS-MULT2   PIC 9(4).
-       01 WS-VALOR-RANDOM     COMP-2.
-       01 WS-ID-RANDOM        PIC 9(04).
-       01 WS-INDEX            PIC 9(02).
-       PROCEDURE DIVISION.
+       IDENTIFICATION                  DIVISION.
+       PROGRAM-ID.                         T04TSRAM.
+       DATA                            DIVISION.
+       WORKING-STORAGE                 SECTION.
+       01  WS-MULT1                    PIC 9(4).
+       01  WS-MULT2                    PIC 9(4).
+       01  WS-VALOR-RANDOM             COMP-2.
+       01  WS-ID-RANDOM                PIC 9(04).
+       01  WS-INDEX                    PIC 9(02).
+       PROCEDURE                       DIVISION.
        MAIN-PARA.
            DISPLAY '=== TESTE DA FUNCTION RANDOM ==='.
-           PERFORM VARYING WS-INDEX FROM 1 BY 1 UNTIL WS-INDEX > 10
-              ACCEPT WS-MULT1 FROM TIME
+           PERFORM VARYING WS-INDEX    FROM 1 BY 1 
+             UNTIL WS-INDEX > 10
+              ACCEPT WS-MULT1          FROM TIME
               COMPUTE WS-VALOR-RANDOM = WS-MULT1 * FUNCTION RANDOM
               COMPUTE WS-ID-RANDOM = WS-VALOR-RANDOM + 1
               COMPUTE WS-MULT2 = (FUNCTION RANDOM * 1000) + 1
-              IF WS-ID-RANDOM > 3125
+              IF  WS-ID-RANDOM > 3125
                   COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
               END-IF
               DISPLAY 'RANDOM FLOAT: ' WS-VALOR-RANDOM
