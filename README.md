@@ -8,9 +8,14 @@ Os rebeldes conseguiram os planos da Estrela da Morte, e você deve descobrir a 
 
 # Imagens
 ![Menu](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/Main2.PNG)
-![end-game](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/end-game.PNG)
-![end-game2](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/end-game2.PNG)
+
 ![tutorial](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/tutorial.PNG)
+
+![end-game](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/end-game.PNG)
+
+![end-game2](https://github.com/Gab-Gon-Tei/Mastermind/blob/main/Screens/end-game2.PNG)
+
+
 
 
 
