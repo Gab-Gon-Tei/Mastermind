@@ -50,8 +50,8 @@
        77  WS-COUNT-SENHAS-COMP            PIC S9(09) COMP.
        77  WS-COUNT-SENHAS                 PIC 9(04).
        77  WS-SEED-RANDOM                  COMP-2.
-       77  WS-ID-RANDOM                    PIC 9(04).
-       77  WS-ID-RANDOM-COMP               PIC S9(09) COMP.
+       77  WS-ID-RANDOM                    PIC 9(01).
+       77  WS-LETRA-S                      PIC X(1).
        77  WS-MULT1                        PIC 9(04).
        77  WS-MULT2                        PIC 9(02).
        77  I                               PIC 9(04).
@@ -97,13 +97,13 @@
       *CARACTERES E ATRIBUTOS
            COPY DFHBMSCA.
 
-           EXEC SQL
-              INCLUDE DCLSENHA
-           END-EXEC.
+      *    EXEC SQL
+      *       INCLUDE DCLSENHA
+      *    END-EXEC.
 
-           EXEC SQL
-              INCLUDE SQLCA
-           END-EXEC.
+      *    EXEC SQL
+      *       INCLUDE SQLCA
+      *    END-EXEC.
       *----------------------------------------------------------------*
        LINKAGE                             SECTION.
       *----------------------------------------------------------------*
@@ -147,61 +147,42 @@
            MOVE LOW-VALUES                 TO MAPASENO
            MOVE -1                         TO LETRA1L
            MOVE WS-CONT-TENTATIVAS         TO CONTO
-           EXEC SQL
-               SELECT COUNT (ID)
-               INTO :WS-COUNT-SENHAS-COMP
-               FROM TCC1.SENHAS
-           END-EXEC
-           EVALUATE SQLCODE
-            WHEN +100
-               MOVE 0 TO WS-COUNT-SENHAS
-               MOVE +80 TO WS-LENGTH
-               MOVE 'ARQUIVO DE SENHAS VAZIO' TO WS-MSG-ERRO
-               PERFORM 999-ENCERRA-TRANSACAO
-            WHEN 0
-               CONTINUE
-            WHEN OTHER
-                MOVE +80                    TO WS-LENGTH
-               MOVE 'ERRO NO CONTADOR DE SENHAS' TO WS-MSG-ERRO
-               PERFORM 999-ENCERRA-TRANSACAO
-           END-EVALUATE
 
-      * O RANDOM PRECISA DE UMA SEED (OU SEMENTE), QUE SERIA UM NUMERO
-      * QUALQUER PARA QUE A FUNCAO TENHA UM NUMERO ALEATORIO.
-      * APOS ISSO, O LIMITE E A QUANTIDADE DE SENHAS.
-           ACCEPT WS-MULT1 FROM TIME
-           COMPUTE WS-SEED-RANDOM = WS-MULT1 * FUNCTION RANDOM
-           COMPUTE WS-ID-RANDOM = WS-SEED-RANDOM + 1
-           ACCEPT WS-MULT2 FROM TIME
-           COMPUTE WS-MULT2 = (FUNCTION RANDOM * WS-MULT2) + 1
-           IF WS-ID-RANDOM > WS-COUNT-SENHAS
-               COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
-           ELSE 
-               IF WS-ID-RANDOM = 0
-               ADD 1 TO WS-ID-RANDOM
+           PERFORM VARYING I FROM 1 BY 1 UNTIL I > 5
+               ACCEPT WS-MULT1 FROM TIME
+               COMPUTE WS-SEED-RANDOM = WS-MULT1 * FUNCTION RANDOM
+               COMPUTE WS-ID-RANDOM = WS-SEED-RANDOM + 1
+               COMPUTE WS-MULT2 = (FUNCTION RANDOM * 10) + 1
+               IF WS-ID-RANDOM > 5
+                   COMPUTE WS-ID-RANDOM = WS-ID-RANDOM / WS-MULT2
                END-IF
-           END-IF
-           MOVE WS-ID-RANDOM TO WS-ID-RANDOM-COMP
+               EVALUATE WS-ID-RANDOM
+               WHEN 1
+                   MOVE 'S' TO WS-LETRA-S
+               WHEN 2
+                   MOVE 'E' TO WS-LETRA-S
+               WHEN 3
+                   MOVE 'N' TO WS-LETRA-S
+               WHEN 4
+                   MOVE 'H' TO WS-LETRA-S
+               WHEN 5                                                           
+                   MOVE 'A' TO WS-LETRA-S          
+               END-EVALUATE
 
-           EXEC SQL
-           SELECT LETRA_1, LETRA_2, LETRA_3, LETRA_4, LETRA_5
-               INTO :WS-LETRA-1, :WS-LETRA-2, :WS-LETRA-3, :WS-LETRA-4,
-               :WS-LETRA-5
-           FROM TCC1.SENHAS
-           WHERE ID = :WS-ID-RANDOM-COMP
-           END-EXEC
-           EVALUATE SQLCODE
-            WHEN +100
-               MOVE +80                        TO WS-LENGTH
-               MOVE 'SENHA NAO ENCONTRADA' TO WS-MSG-ERRO
-               PERFORM 999-ENCERRA-TRANSACAO
-            WHEN 0
-               MOVE 'USE A FORCA E DESCUBRA A SENHA' TO MSGO
-            WHEN OTHER
-               MOVE +80                    TO WS-LENGTH
-               MOVE 'ERRO AO BUSCAR SENHA' TO WS-MSG-ERRO
-               PERFORM 999-ENCERRA-TRANSACAO
-           END-EVALUATE
+               EVALUATE I
+               WHEN 1                                             
+                   MOVE WS-LETRA-S TO WS-LETRA-1                 
+               WHEN 2                                             
+                   MOVE WS-LETRA-S TO WS-LETRA-2                 
+               WHEN 3                                             
+                   MOVE WS-LETRA-S TO WS-LETRA-3                 
+               WHEN 4                                             
+                   MOVE WS-LETRA-S TO WS-LETRA-4                 
+               WHEN 5                                             
+                   MOVE WS-LETRA-S TO WS-LETRA-5                 
+               END-EVALUATE
+           END-PERFORM
+           
            MOVE 100 TO WS-PONTUACAO
             PERFORM 999-TRATA-FASE2
            .
